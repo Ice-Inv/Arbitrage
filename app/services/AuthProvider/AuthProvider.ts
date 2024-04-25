@@ -2,57 +2,59 @@ import { SERVICE_API } from '@env';
 import { LoginData, RegisterData, User } from '../../providers/AuthProvider/types';
 import { iceService } from '../../api';
 
+// Регистрация в приложении
 const postRegister = async (params: RegisterData): Promise<User> => {
-  const { data } = await iceService.post<User>(`${SERVICE_API}/register`, {
-    data: params
+  const { data } = await iceService.post<User>(`${SERVICE_API}/user/register`, {
+    data: params,
   });
   return data;
 }
 
+// Войти в приложение
 const postLogin = async (params: LoginData): Promise<User> => {
-
-  const { data } = await iceService.post<User>(`${SERVICE_API}/login`, {
-    data: {
-      password: params.password,
-      name: params.name,
-      email: params.email,
-    }
+  const { data } = await iceService.post<User>(`${SERVICE_API}/user/login`, {
+    data: params,
   })
   return data;
 }
 
-const getLogout = async (id: string): Promise<boolean> => {
-  const { data } = await iceService.get<boolean>(`${SERVICE_API}/logout`, {
+// Выйти из аккаунта и отвязать устройство
+const getLogout = async (uid: string): Promise<boolean> => {
+  const { data } = await iceService.get<boolean>(`${SERVICE_API}/user/logout`, {
     params: {
-      id,
+      uid,
     }
   })
   return data;
 }
-const putTimezone = async (id: string, timeZone: string): Promise<string> => {
+
+// Установить часовой пояс пользователя
+const putTimezone = async (uid: string, timezone: string): Promise<string> => {
   const { data } = await iceService.put<string>(`${SERVICE_API}/user/timezone`, {
     params: {
-      id,
-      timeZone,
+      uid,
+      timezone,
     }
   })
   return data;
 }
 
-const putLocale = async (id: string, locale: string): Promise<string> => {
+// Установить локацию пользователя
+const putLocale = async (uid: string, locale: string): Promise<string> => {
   const { data } = await iceService.put<string>(`${SERVICE_API}/user/locale`, {
     params: {
-      id,
+      uid,
       locale,
     }
   })
   return data;
 }
 
-const putCurrency = async (id: string, currency: string): Promise<string> => {
+// Установить валюту пользователя
+const putCurrency = async (uid: string, currency: string): Promise<string> => {
   const { data } = await iceService.put<string>(`${SERVICE_API}/user/currency`, {
     params: {
-      id,
+      uid,
       currency,
     }
   })
