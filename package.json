@@ -4,19 +4,33 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "start:npx": "APP_ENV=production&& npx expo start --clear",
+    "start:npx-dev": "NODE_ENV=development&& npx expo start --clear",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.9.26",
+    "@rneui/base": "^4.0.0-rc.8",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "axios": "^1.6.8",
+    "dayjs": "^1.11.10",
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
+    "qs": "^6.12.1",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.73.6",
+    "react-native-safe-area-context": "^4.10.1",
+    "react-native-screens": "^3.31.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/qs": "^6.9.15",
     "@types/react": "~18.2.45",
+    "@types/react-native-dotenv": "^0.2.2",
+    "react-native-dotenv": "^3.4.11",
     "typescript": "^5.1.3"
   },
   "private": true
