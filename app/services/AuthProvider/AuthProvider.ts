@@ -4,9 +4,19 @@ import { iceService } from '../../api';
 
 // Регистрация в приложении
 const postRegister = async (params: RegisterData): Promise<User> => {
-  const { data } = await iceService.post<User>(`${SERVICE_API}/user/register`, {
-    data: params,
-  });
+  // const { data } = await iceService.post<User>(`${SERVICE_API}/user/register`, {
+  //   data: params,
+  // });
+  const data = {
+    name: 'Noname',
+    phone: '+79003004040',
+    email: 'example@example.com',
+    timezone: 'UTS+4',
+    currency: 'EUR',
+    locale: 'en',
+    id: '1',
+  }
+
   return data;
 }
 
