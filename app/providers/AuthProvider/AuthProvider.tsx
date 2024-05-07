@@ -1,5 +1,5 @@
-import { createContext, useMemo, useState } from "react";
-import { AuthContextProps, RegisterData, User, AuthProviderProps, LoginData} from './types';
+import { createContext, useEffect, useMemo, useState } from "react";
+import { AuthContextProps, User, AuthProviderProps} from './types';
 import { authService } from "../../services/AuthProvider";
 import { AxiosError } from "axios";
 
@@ -12,11 +12,15 @@ export function AuthProvider({
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleRegister(data: RegisterData) {
+  useEffect(() => {
+    handlerUserInfo();
+  }, []);
+
+  async function handlerUserInfo() {
     try {
       setIsLoading(true);
-      const userData = await authService.postRegister(data);
-      setUser(userData);
+      const userInfo = await authService.getUserInfo();
+      setUser(userInfo !== undefined ? userInfo : null);
     } catch (error) {
       setError(error as AxiosError);
     } finally {
@@ -24,11 +28,23 @@ export function AuthProvider({
     }
   }
 
-  async function handleLogin(data: LoginData) {
+  async function handleRegister(login: string, password: string) {
     try {
       setIsLoading(true);
-      const userData = await authService.postLogin(data);
-      setUser(userData);
+      await authService.postRegisterUser(login, password);
+      await handlerUserInfo();
+    } catch (error) {
+      setError(error as AxiosError);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function handleLogin(login: string, password: string) {
+    try {
+      setIsLoading(true);
+      await authService.postLoginUser(login, password);
+      await handlerUserInfo();
     } catch (error) {
       setError(error as AxiosError);
     } finally {
@@ -92,6 +108,7 @@ export function AuthProvider({
     user,
     isLoading,
     error,
+    userInfo: handlerUserInfo,
     login: handleLogin,
     register: handleRegister,
     logout: handleLogout,

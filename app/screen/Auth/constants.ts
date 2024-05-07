@@ -4,7 +4,7 @@ export const AUTH = {
 }
 
 export const PLACEHOLDER = {
-  username: 'Username',
+  username: 'Логин',
   email: 'E-mail',
   phone: 'Номер телефона',
   password: 'Пароль',
@@ -15,5 +15,3 @@ export const IS_REGISTRATION = {
   signIn: 'Нет аккаунта?',
   signUp: 'Уже зарегистрированы?',
 }
-
-export const SIGN_IN = 'Username или e-mail';

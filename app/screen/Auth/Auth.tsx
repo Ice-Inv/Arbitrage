@@ -1,15 +1,13 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Button, ColorTheme, LoaderContainer, TextField } from "../../common";
 import { useAuthorization } from "./hooks/useAuthorization";
-import { IS_REGISTRATION, PLACEHOLDER, AUTH, SIGN_IN } from "./constants";
+import { IS_REGISTRATION, PLACEHOLDER, AUTH } from "./constants";
 import { useTheme } from "@rneui/themed";
 
 export function Auth() {
   const {
     isLoading,
-    name,
-    email,
-    phone,
+    userLogin,
     password,
     repeatPassword,
     handleRegister,
@@ -28,9 +26,7 @@ export function Auth() {
           </Text>
 
           <LoaderContainer isLoading={isLoading}>
-            <TextField {...name} placeholder={!isRegistration ? SIGN_IN : PLACEHOLDER.username} />
-            {isRegistration && <TextField {...email} placeholder={PLACEHOLDER.email} />}
-            {isRegistration && <TextField {...phone} placeholder={PLACEHOLDER.phone} />}
+            <TextField {...userLogin} placeholder={PLACEHOLDER.username} />
             <TextField {...password} placeholder={PLACEHOLDER.password} />
             {isRegistration && <TextField {...repeatPassword} placeholder={PLACEHOLDER.repeatPassword} />}
           </LoaderContainer>

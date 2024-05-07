@@ -1,1 +1,1 @@
-export * from './iceService';
+export * from './api';

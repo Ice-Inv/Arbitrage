@@ -1,36 +1,80 @@
 import { SERVICE_API } from '@env';
-import { LoginData, RegisterData, User } from '../../providers/AuthProvider/types';
-import { iceService } from '../../api';
+import { User } from '../../providers/AuthProvider/types';
+import { baseService, authenticationService } from '../../api';
+import { saveToken, toCamelCase } from '../../utils';
+import { ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE } from '../../constants';
+import { AUTH_ROUTES } from '../../routes/Auth';
+import { AUTH_ERROR } from '../../error/Auth';
+import { Tokens } from '../../types/Auth';
 
-// Регистрация в приложении
-const postRegister = async (params: RegisterData): Promise<User> => {
-  // const { data } = await iceService.post<User>(`${SERVICE_API}/user/register`, {
-  //   data: params,
-  // });
-  const data = {
-    name: 'Noname',
-    phone: '+79003004040',
-    email: 'example@example.com',
-    timezone: 'UTS+4',
-    currency: 'EUR',
-    locale: 'en',
-    id: '1',
+/**
+ * Функция для регистрации нового пользователя.
+ * @param login Логин пользователя.
+ * @param password Пароль пользователя.
+ * @returns Объект с ответом сервера.
+ */
+async function postRegisterUser(login: string, password: string): Promise<void> {
+  try {
+    const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Register, {
+      login,
+      password,
+    });
+
+    const { accessToken, refreshToken, tokenType } = toCamelCase(data);
+
+    await saveToken(ACCESS_TOKEN, accessToken);
+    await saveToken(REFRESH_TOKEN, refreshToken);
+    await saveToken(TOKEN_TYPE, tokenType);
+  } catch (error) {
+    console.error(AUTH_ERROR.Register, error);
+    throw error;
   }
-
-  return data;
 }
 
-// Войти в приложение
-const postLogin = async (params: LoginData): Promise<User> => {
-  const { data } = await iceService.post<User>(`${SERVICE_API}/user/login`, {
-    data: params,
-  })
-  return data;
+/**
+ * Функция для входа пользователя.
+ * @param login Login пользователя.
+ * @param password Пароль пользователя.
+ * @returns Объект с ответом сервера.
+ */
+async function postLoginUser(login: string, password: string): Promise<void> {
+  try {
+    const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Login, {
+      login,
+      password,
+    });
+
+    console.log(data);
+
+    const { accessToken, refreshToken, tokenType } = toCamelCase(data);
+
+    await saveToken(ACCESS_TOKEN, accessToken);
+    await saveToken(REFRESH_TOKEN, refreshToken);
+    await saveToken(TOKEN_TYPE, tokenType);
+  } catch (error) {
+    console.error(AUTH_ERROR.Login, error);
+    throw error;
+  }
+}
+
+/**
+ * Функция для получения информации о пользователе.
+ * @returns Объект с ответом сервера.
+ */
+async function getUserInfo(): Promise<User> {
+  try {
+    const { data } = await baseService.get<User>(AUTH_ROUTES.UserInfo);
+
+    return data;
+  } catch (error) {
+    console.error(AUTH_ERROR.UserInfo, error);
+    throw error;
+  }
 }
 
 // Выйти из аккаунта и отвязать устройство
 const getLogout = async (uid: string): Promise<boolean> => {
-  const { data } = await iceService.get<boolean>(`${SERVICE_API}/user/logout`, {
+  const { data } = await baseService.get<boolean>(`${SERVICE_API}/user/logout`, {
     params: {
       uid,
     }
@@ -40,7 +84,7 @@ const getLogout = async (uid: string): Promise<boolean> => {
 
 // Установить часовой пояс пользователя
 const putTimezone = async (uid: string, timezone: string): Promise<string> => {
-  const { data } = await iceService.put<string>(`${SERVICE_API}/user/timezone`, {
+  const { data } = await baseService.put<string>(`${SERVICE_API}/user/timezone`, {
     params: {
       uid,
       timezone,
@@ -51,7 +95,7 @@ const putTimezone = async (uid: string, timezone: string): Promise<string> => {
 
 // Установить локацию пользователя
 const putLocale = async (uid: string, locale: string): Promise<string> => {
-  const { data } = await iceService.put<string>(`${SERVICE_API}/user/locale`, {
+  const { data } = await baseService.put<string>(`${SERVICE_API}/user/locale`, {
     params: {
       uid,
       locale,
@@ -62,7 +106,7 @@ const putLocale = async (uid: string, locale: string): Promise<string> => {
 
 // Установить валюту пользователя
 const putCurrency = async (uid: string, currency: string): Promise<string> => {
-  const { data } = await iceService.put<string>(`${SERVICE_API}/user/currency`, {
+  const { data } = await baseService.put<string>(`${SERVICE_API}/user/currency`, {
     params: {
       uid,
       currency,
@@ -72,8 +116,9 @@ const putCurrency = async (uid: string, currency: string): Promise<string> => {
 }
 
 export const authService = {
-  postRegister,
-  postLogin,
+  getUserInfo,
+  postRegisterUser,
+  postLoginUser,
   getLogout,
   putTimezone,
   putLocale,

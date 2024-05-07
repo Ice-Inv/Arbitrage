@@ -29,6 +29,7 @@
   - common - основные элементы системы из которых формируется страница
   - components - глобальные компоненты состоящие из элементов в common
   - constants - глобальные константы в проекте
+  - error - Описания ошибок, названия папок должны совпадать с папками services
   - hooks - генеральные хуки, контроллеры, доступы к провайдерам и т.п.
   - providers - глобальные провайдеры основной из которых - авторизация
   - routes - список маршрутов в проекте
@@ -44,6 +45,9 @@
 - useTextField - предоставляет контроллер для управления полями ввода, такими как input
 - useToggle - возвращает bool значение и функцию изменяющее состояние на !bool
 
+### Utils
+- secureStore - предоставляет инструменты сохранения, обновления и удаления различных токенов
+
 ## Используемые библиотеки
 
 - ReactNative и ExpoGo - базовые для создания приложения
@@ -57,10 +61,3 @@
 ## Полезные ссылки
 
 [Макет](https://www.figma.com/file/JLOcFmnqLgMH2nBWdJd3Lq/Arbitrage-Mobile?type=design&node-id=0-1&mode=design&t=h4LTmXe9veqEQr1K-0 "Задумка для реализации дизайна данного проекта")
-<br>
-
-[GitHub - Frontend](https://github.com/Ausftilar, "Разработчик")
-[GitHub - Backend](https://github.com/SevastyanovV, "Разработчик")
-[GitHub - Backend](https://github.com/nbormintsev, "Разработчик")
-[GitHub - Backend](https://github.com/En-Donny, "Разработчик")
-[GitHub - Frontend](https://github.com/ExJHIN, "Разработчик")

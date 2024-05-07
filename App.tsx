@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@rneui/themed';
-import { AuthProvider } from './app/providers/AuthProvider/AuthProvider';
+import { AuthProvider } from './app/providers';
 import { MainTheme } from './app/themes';
 import { Container } from './app/components';
 import Navigation from './app/components/Navigation/Navigation';
