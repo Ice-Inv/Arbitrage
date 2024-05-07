@@ -14,14 +14,13 @@ function getValidValue(value: string | number) {
 export function useTextField({
   initValue,
   regexp,
-  checkValidate,
   errorText = '',
   isRequired = false,
 }: useTextFieldProps) {
   const [value, setValue] = useState(getValidValue(initValue));
   const [error, setError] = useState('');
 
-  const isValidated = errorText || checkValidate || isRequired;
+  const isValidated = errorText || isRequired;
 
   function onError(error: string = '') {
     setError(error ? error : errorText);
@@ -62,17 +61,18 @@ export function useTextField({
     }
   }
 
-  function getValidate(value: string | number) {
-    const correctedValue = getValidValue(value);
+  function getValidate(callbackFunc: () => boolean, error: string): boolean {
+    if (isRequired && !value) {
+      setError('Обязательное поле!');
+      return false
+    };
 
-    if (!checkValidate) return;
+    if (!callbackFunc()) {
+      setError(error || errorText || '');
+      return false;
+    }
 
-    if (isRequired && !correctedValue) {
-      setError('Обязательное поле!')
-    }
-    if (checkValidate(correctedValue)) {
-      setError(errorText);
-    }
+    return true;
   }
 
   return [{value, onChange}, {error, onReset, onSetValue, onError, onResetError, getValidate}] as const

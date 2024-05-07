@@ -1,4 +1,5 @@
 import * as SecureStore from 'expo-secure-store';
+import { Platform } from 'react-native';
 
 /**
  * Сохраняет значение по заданному ключу.
@@ -7,8 +8,12 @@ import * as SecureStore from 'expo-secure-store';
  */
 export const saveToken = async (key: string, value: string) => {
   try {
-    await SecureStore.setItemAsync(key, value);
-    console.log('Токен сохранен успешно!');
+    if (Platform.OS === 'web') {
+      window.localStorage.setItem(key, value);
+    } else {
+      await SecureStore.setItemAsync(key, value);
+      console.log('Токен сохранен успешно!');
+    }
   } catch (e) {
     console.error('Ошибка при сохранении токена:', e);
   }
@@ -21,13 +26,14 @@ export const saveToken = async (key: string, value: string) => {
  */
 export const getToken = async (key: string): Promise<string | null> => {
   try {
-    const value = await SecureStore.getItemAsync(key);
-    if (value) {
-      console.log('Токен успешно получен!');
+    if (Platform.OS === 'web') {
+      const value = window.localStorage.getItem(key);
+      return value;
     } else {
-      console.warn('Токен не найден');
+      const value = await SecureStore.getItemAsync(key);
+      console.log('Токен получен успешно!');
+      return value;
     }
-    return value;
   } catch (e) {
     console.error('Ошибка при получении токена:', e);
     return null;
@@ -40,8 +46,11 @@ export const getToken = async (key: string): Promise<string | null> => {
  */
 export const removeToken = async (key: string) => {
   try {
-    await SecureStore.deleteItemAsync(key);
-    console.log('Токен успешно удален!');
+    if (Platform.OS === 'web') {
+      window.localStorage.removeItem(key);
+    } else {
+      await SecureStore.deleteItemAsync(key);
+    }
   } catch (e) {
     console.error('Ошибка при удалении токена:', e);
   }

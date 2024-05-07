@@ -44,8 +44,6 @@ async function postLoginUser(login: string, password: string): Promise<void> {
       password,
     });
 
-    console.log(data);
-
     const { accessToken, refreshToken, tokenType } = toCamelCase(data);
 
     await saveToken(ACCESS_TOKEN, accessToken);

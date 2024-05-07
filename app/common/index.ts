@@ -8,3 +8,4 @@ export * from './Padding';
 export * from './SubHeading';
 export * from './TextField';
 export * from './ColorTheme';
+export * from './Rate';

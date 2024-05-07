@@ -7,26 +7,36 @@ export function Avatar({
   size = 'small',
 }: AvatarProps) {
   const isSmall = size === 'small'
-  const {theme} = useTheme();
+  const {
+    theme: {
+      mode,
+      colors: {
+        main1,
+        element1,
+        element2,
+      },
+    }
+  } = useTheme();
 
   return (
     <View
       style={{
         borderRadius: 9999,
-        backgroundColor: theme.colors.main1,
+        backgroundColor: main1,
         width: isSmall ? 36 : 48,
         height: isSmall ? 36 : 48,
-        marginRight: isSmall ? 12 : undefined,
+        marginRight: 12,
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
       <Text
         style={{
-          color: theme.colors.element1,
-          fontSize: isSmall ? 18 : 20,
-          lineHeight: 28,
-          fontWeight: "500",
+          color: mode === "light" ? element2 : element1,
+          fontSize: isSmall ? 18 : 30,
+          lineHeight: isSmall ? 36 : 48,
+          fontWeight: "700",
+          textTransform: 'uppercase',
         }}
       >
         {name?.slice(0, 1)}

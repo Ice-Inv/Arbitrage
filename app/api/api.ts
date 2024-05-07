@@ -53,6 +53,8 @@ baseService.interceptors.request.use(
       return stringify(params, {arrayFormat: 'repeat'})
     }
 
+    console.log(request.url);
+
     const accessToken = await getToken(ACCESS_TOKEN);
     const tokenType = await getToken(TOKEN_TYPE) || DEFAULT_TOKEN_TYPE;
     if (accessToken) {

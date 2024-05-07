@@ -7,5 +7,5 @@ export function LoaderContainer({
 }: LoaderContainerProps) {
   return isLoading
     ? <Loader />
-    : <>{children}</>
+    : children
 }

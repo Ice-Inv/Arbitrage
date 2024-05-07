@@ -32,7 +32,7 @@ export function Auth() {
           </LoaderContainer>
 
           <Button
-            onPress={isRegistration ? handleLogin : handleRegister}
+            onPress={isRegistration ? handleRegister : handleLogin}
             title={isRegistration ? AUTH.signUp : AUTH.signIn}
           />
 
