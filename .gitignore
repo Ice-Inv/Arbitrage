@@ -38,7 +38,3 @@ yarn-error.*
 .env
 .env.development
 .env.local
-
-# lock
-yarn.lock
-package-lock.json
