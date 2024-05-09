@@ -13,8 +13,10 @@ export enum ThemeColorKey {
   Main3 = 'main3',
   Green1 = 'green1',
   Green2 = 'green2',
+  Green3 = 'green3',
   Red1 = 'red1',
   Red2 = 'red2',
+  Red3 = 'red3',
   Blue1 = 'blue1',
 };
 

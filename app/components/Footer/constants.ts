@@ -11,7 +11,7 @@ export const MENU: FooterItemProps[] = [
   },
   {
     iconName: 'book',
-    title: 'MyIncome'
+    title: 'Income'
   },
   {
     iconName: 'user',

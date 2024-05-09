@@ -5,7 +5,7 @@ import { Footer } from '../Footer';
 import { Home } from '../../screen/Home';
 import { Auth } from '../../screen/Auth';
 import { useAuth } from '../../hooks/useAuth';
-import { Chains, ChainsFilters, MyIncome, Profile, Rates, Settings, TransactionHistory, UpdatePassword } from '../../screen';
+import { Chains, ChainsFilters, Income, Profile, Rates, Settings, TransactionHistory, UpdatePassword } from '../../screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,8 +42,8 @@ function Navigation() {
     },
     {
       key: 3,
-      name: 'MyIncome',
-      component: MyIncome,
+      name: 'Income',
+      component: Income,
     },
     {
       key: 4,

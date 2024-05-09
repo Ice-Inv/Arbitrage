@@ -13,7 +13,9 @@ export const colorsLight: ThemeColor = {
   [ThemeColorKey.Main3]: '#F92EDB',
   [ThemeColorKey.Green1]: '#0BE881',
   [ThemeColorKey.Green2]: '#364334',
+  [ThemeColorKey.Green3]: 'rgba(11, 232, 129, 0.15)',
   [ThemeColorKey.Red1]: '#FF2E00',
   [ThemeColorKey.Red2]: '#4B2E2D',
+  [ThemeColorKey.Red3]: 'rgba(255, 46, 0, 0.15)',
   [ThemeColorKey.Blue1]: '#00A3FF',
 };

@@ -2,7 +2,7 @@ export enum NAVIGATE {
   Auth = 'Auth',
   Home = 'Home',
   Chains = 'Chains',
-  MyIncome = 'MyIncome',
+  Income = 'Income',
   Profile = 'Profile',
   ChainsFilters = 'ChainsFilters',
   TransactionHistory = 'TransactionHistory',

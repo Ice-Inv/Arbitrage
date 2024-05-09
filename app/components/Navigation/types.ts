@@ -2,7 +2,7 @@ export type TypeRootStackParamList = {
   Auth: undefined;
   Home: undefined;
   Chains: undefined;
-  MyIncome: undefined;
+  Income: undefined;
   Profile: undefined;
   ChainsFilters: undefined;
   TransactionHistory: undefined;
