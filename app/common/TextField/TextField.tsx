@@ -7,6 +7,7 @@ export function TextField({
   value,
   placeholder,
   isSecure,
+  isDisable = false,
 }: FieldProps) {
   const {theme} = useTheme();
 
@@ -16,17 +17,17 @@ export function TextField({
       onChangeText={onChange}
       placeholder={placeholder}
       secureTextEntry={isSecure}
-      showSoftInputOnFocus={false}
       autoCapitalize="none"
       style={{
-        borderRadius: 12,
+        borderRadius: 8,
         backgroundColor: theme.mode === 'dark' ? theme.colors.bg3 : theme.colors.element4,
         color:  theme.mode === 'dark' ? theme.colors.element2 : theme.colors.element1,
-        marginTop: 12,
+        marginTop: 15,
         padding: 12,
         width: '100%',
       }}
       placeholderTextColor={theme.colors.element3}
+      editable={!isDisable}
     />
   )
 }

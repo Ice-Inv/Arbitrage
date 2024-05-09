@@ -8,18 +8,18 @@ import { NAVIGATE } from "../../constants";
 import { useTheme } from "@rneui/themed";
 
 const { width } = Dimensions.get('window');
-  const calculatedWidth = width - 92;
 
 export function Header({
   title,
+  isNotCircle,
 }: HeaderProps) {
+  const calculatedWidth = width - 32 - (isNotCircle ? 0 : 60);
   const { isLoading, user } = useAuth();
   const { navigate } = useNavigation();
   const {
     theme: {
       mode,
       colors : {
-        main1,
         element1,
         element2,
       },
@@ -35,8 +35,15 @@ export function Header({
   return (
     <LoaderContainer isLoading={isLoading}>
       <Padding style={styles.root}>
-        <Avatar name={user?.login} size="large" />
-        <View style={styles.headerContainer}>
+        {!isNotCircle && (
+          <Avatar name={user?.login} size="large" />
+        )}
+        <View
+          style={{
+            ...styles.headerContainer,
+            width: calculatedWidth,
+          }}
+        >
           <TouchableOpacity
             onPress={handleNavigate}
             style={styles.avatarPress}
@@ -69,6 +76,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 20,
   },
   avatarPress: {
     flexDirection: 'row',
@@ -78,7 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: calculatedWidth,
   },
   avatarText: {
     fontSize: 24,

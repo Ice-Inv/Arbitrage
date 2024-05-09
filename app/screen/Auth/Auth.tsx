@@ -3,6 +3,7 @@ import { Button, ColorTheme, LoaderContainer, TextField } from "../../common";
 import { useAuthorization } from "./hooks/useAuthorization";
 import { IS_REGISTRATION, PLACEHOLDER, AUTH } from "./constants";
 import { useTheme } from "@rneui/themed";
+import { useEffect } from "react";
 
 export function Auth() {
   const {
@@ -21,30 +22,40 @@ export function Auth() {
     <View style={{...styles.root, backgroundColor: theme.colors.bg1}}>
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          <Text style={{...styles.title, color: theme.colors.element1}}>
-            {isRegistration ? AUTH.signUp : AUTH.signIn}
-          </Text>
-
           <LoaderContainer isLoading={isLoading}>
-            <TextField {...userLogin} placeholder={PLACEHOLDER.username} />
-            <TextField {...password} placeholder={PLACEHOLDER.password} />
-            {isRegistration && <TextField {...repeatPassword} placeholder={PLACEHOLDER.repeatPassword} />}
+            <Text style={{...styles.title, color: theme.colors.element1}}>
+              {isRegistration ? AUTH.signUp : AUTH.signIn}
+            </Text>
+              <TextField {...userLogin} placeholder={PLACEHOLDER.username} />
+              <TextField
+                {...password}
+                placeholder={PLACEHOLDER.password}
+                isSecure
+              />
+              {isRegistration && (
+                <TextField
+                  {...repeatPassword}
+                  placeholder={PLACEHOLDER.repeatPassword}
+                  isSecure
+                />
+              )}
+            
+
+            <Button
+              onPress={isRegistration ? handleRegister : handleLogin}
+              title={isRegistration ? AUTH.signUp : AUTH.signIn}
+            />
+
+            <View style={styles.actionsContainer}>
+              <ColorTheme />
+
+              <Pressable onPress={handleIsRegistration}>
+                <Text style={{...styles.pressableText, color: theme.colors.element1}}>
+                  {isRegistration ? IS_REGISTRATION.signUp : IS_REGISTRATION.signIn}
+                </Text>
+              </Pressable>
+            </View>
           </LoaderContainer>
-
-          <Button
-            onPress={isRegistration ? handleRegister : handleLogin}
-            title={isRegistration ? AUTH.signUp : AUTH.signIn}
-          />
-
-          <View style={styles.actionsContainer}>
-            <ColorTheme />
-
-            <Pressable onPress={handleIsRegistration}>
-              <Text style={{...styles.pressableText, color: theme.colors.element1}}>
-                {isRegistration ? IS_REGISTRATION.signUp : IS_REGISTRATION.signIn}
-              </Text>
-            </Pressable>
-          </View>
         </View>
       </View>
     </View>

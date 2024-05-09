@@ -1,10 +1,14 @@
-import { Text } from "react-native";
 import { Layout } from "../../common";
+import { Header } from "../../components";
+import { Avatar } from "./components/Avatar";
+import { ProfileForm } from "./components/ProfileForm";
 
 export function Profile() {
   return (
     <Layout>
-      <Text>Profile</Text>
+      <Header title="Личный кабинет" isNotCircle />
+      <Avatar />
+      <ProfileForm />
     </Layout>
   );
 }

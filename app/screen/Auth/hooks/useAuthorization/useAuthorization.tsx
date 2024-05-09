@@ -26,11 +26,11 @@ export function useAuthorization() {
   const [isRegistration, handleIsRegistration] = useToggle();
 
   function handleRegister() {
-    if (
-      !userLoginParams.getValidate(validateLogin, ERROR_TEXT.Login) ||
-      !passwordParams.getValidate(validateRepeatPassword, ERROR_TEXT.RepeatPassword) ||
-      !repeatPasswordParams.getValidate(validatePassword, ERROR_TEXT.PasswordEasy)
-    ) return;
+    // if (
+    //   !userLoginParams.getValidate(validateLogin, ERROR_TEXT.Login) ||
+    //   !passwordParams.getValidate(validateRepeatPassword, ERROR_TEXT.RepeatPassword) ||
+    //   !repeatPasswordParams.getValidate(validatePassword, ERROR_TEXT.PasswordEasy)
+    // ) return;
 
     register(userLogin.value, password.value)
   }

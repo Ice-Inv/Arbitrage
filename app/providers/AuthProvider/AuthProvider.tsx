@@ -11,16 +11,13 @@ export function AuthProvider({
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<AxiosError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    handlerUserInfo();
-  }, []);
+  const [isLoadingInitial, setIsLoadingInitial] = useState(true);
 
   async function handlerUserInfo() {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const userInfo = await authService.getUserInfo();
-      setUser(userInfo !== undefined ? userInfo : null);
+      setUser(userInfo);
     } catch (error) {
       setError(error as AxiosError);
     } finally {
@@ -29,8 +26,8 @@ export function AuthProvider({
   }
 
   async function handleRegister(login: string, password: string) {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await authService.postRegisterUser(login, password);
       await handlerUserInfo();
     } catch (error) {
@@ -41,8 +38,8 @@ export function AuthProvider({
   }
 
   async function handleLogin(login: string, password: string) {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await authService.postLoginUser(login, password);
       await handlerUserInfo();
     } catch (error) {
@@ -52,10 +49,10 @@ export function AuthProvider({
     }
   }
 
-  async function handleLogout(id: string) {
+  async function handleLogout() {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const userData = await authService.getLogout(id);
+      const userData = await authService.getLogout();
       
       userData && setUser(null);
     } catch (error) {
@@ -104,6 +101,11 @@ export function AuthProvider({
     }
   }
 
+  useEffect(() => {
+    handlerUserInfo();
+    setIsLoadingInitial(false);
+  }, []);
+
   const value = useMemo(() => ({
     user,
     isLoading,
@@ -119,7 +121,7 @@ export function AuthProvider({
 
   return (
     <AuthContext.Provider value={value}>
-     {!isLoading && children}
+     {!isLoadingInitial && children}
     </AuthContext.Provider>
   )
 }

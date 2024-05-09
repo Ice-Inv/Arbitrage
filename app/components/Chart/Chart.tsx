@@ -65,7 +65,6 @@ export function Chart({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
     paddingHorizontal: 8,
     paddingVertical: 10,
     backgroundColor: '#F3F4F6',

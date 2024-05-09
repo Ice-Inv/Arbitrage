@@ -15,13 +15,13 @@ export function Button({
       underlayColor={colors ? colors[1] : theme.colors.main3}
       style={{
         backgroundColor: colors ? colors[0] : theme.colors.main1,
-        borderRadius: 12,
+        borderRadius: 8,
         width: '100%',
         marginVertical: 16,
-        paddingVertical: 12,
+        paddingVertical: 10,
       }}
     >
-      <Text style={{color: theme.colors.element2, textAlign: 'center'}}>
+      <Text style={{color: theme.colors.element2, textAlign: 'center', fontSize: 16, fontWeight: 'bold'}}>
         {title}
       </Text>
     </TouchableHighlight>

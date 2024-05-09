@@ -1,7 +1,7 @@
 import { SERVICE_API } from '@env';
 import { User } from '../../providers/AuthProvider/types';
 import { baseService, authenticationService } from '../../api';
-import { saveToken, toCamelCase } from '../../utils';
+import { saveToken, removeToken, toCamelCase } from '../../utils';
 import { ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE } from '../../constants';
 import { AUTH_ROUTES } from '../../routes/Auth';
 import { AUTH_ERROR } from '../../error/Auth';
@@ -27,7 +27,6 @@ async function postRegisterUser(login: string, password: string): Promise<void> 
     await saveToken(TOKEN_TYPE, tokenType);
   } catch (error) {
     console.error(AUTH_ERROR.Register, error);
-    throw error;
   }
 }
 
@@ -51,7 +50,6 @@ async function postLoginUser(login: string, password: string): Promise<void> {
     await saveToken(TOKEN_TYPE, tokenType);
   } catch (error) {
     console.error(AUTH_ERROR.Login, error);
-    throw error;
   }
 }
 
@@ -59,25 +57,24 @@ async function postLoginUser(login: string, password: string): Promise<void> {
  * Функция для получения информации о пользователе.
  * @returns Объект с ответом сервера.
  */
-async function getUserInfo(): Promise<User> {
+async function getUserInfo(): Promise<User | null> {
   try {
     const { data } = await baseService.get<User>(AUTH_ROUTES.UserInfo);
 
     return data;
   } catch (error) {
     console.error(AUTH_ERROR.UserInfo, error);
-    throw error;
+    return null;
   }
 }
 
 // Выйти из аккаунта и отвязать устройство
-const getLogout = async (uid: string): Promise<boolean> => {
-  const { data } = await baseService.get<boolean>(`${SERVICE_API}/user/logout`, {
-    params: {
-      uid,
-    }
-  })
-  return data;
+const getLogout = async (): Promise<boolean> => {
+  // const { data } = await baseService.get<boolean>(`${SERVICE_API}/user/logout`)
+  removeToken(ACCESS_TOKEN);
+  removeToken(REFRESH_TOKEN);
+
+  return true;
 }
 
 // Установить часовой пояс пользователя
