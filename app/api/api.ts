@@ -9,17 +9,17 @@ import {stringify} from 'qs';
 
 // Конфигурация базового сервиса
 export const baseService = axios.create({
-  baseURL: SERVICE_API,
+  baseURL: 'http://93.183.92.195:8001',
 });
 
 // Конфигурация сервиса для аутентификации
 export const authenticationService = axios.create({
-  baseURL: SERVICE_API,
+  baseURL: 'http://93.183.92.195:8001',
 });
 
 // Конфигурация сервиса обновления токенов
 const refreshService = axios.create({
-  baseURL: SERVICE_API,
+  baseURL: 'http://93.183.92.195:8001',
 });
 
 // Запрос для обновления токена
@@ -52,9 +52,6 @@ baseService.interceptors.request.use(
     request.paramsSerializer = (params) => {
       return stringify(params, {arrayFormat: 'repeat'})
     }
-
-    console.log(request.url);
-
     const accessToken = await getToken(ACCESS_TOKEN);
     const tokenType = await getToken(TOKEN_TYPE) || DEFAULT_TOKEN_TYPE;
     if (accessToken) {
