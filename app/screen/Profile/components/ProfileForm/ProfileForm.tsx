@@ -1,19 +1,25 @@
 import { Button, ButtonGradient, Padding, TextField } from "../../../../common";
+import { Devices } from "./components/Devices";
+import { InvitationCode } from "./components/InvitationСode";
 import { useProfileForm } from "./hooks/useProfileForm";
 
 export function ProfileForm() {
   const {
-    login,
+    name,
     email,
     logout,
+    handleSetScreenUpdatePassword,
+    handleSetScreenSettings,
   } = useProfileForm();
 
   return (
     <Padding>
-      <TextField {...login } placeholder="Логин" isDisable />
+      <TextField {...name } placeholder="Ваше имя" isDisable />
       <TextField {...email } placeholder="E-mail" isDisable />
-      <ButtonGradient title="Сменить пароль" onPress={() => {}} />
-      <ButtonGradient title="Перейти к настройкам" onPress={() => {}} />
+      <ButtonGradient title="Сменить пароль" onPress={handleSetScreenUpdatePassword} />
+      <ButtonGradient title="Перейти к настройкам" onPress={handleSetScreenSettings} />
+      <InvitationCode code={'EFR4-M5DF-LKIO-A9H0-7HCP'} />
+      <Devices />
       <Button title="Выход" onPress={logout}/>
     </Padding>
   );

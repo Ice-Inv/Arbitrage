@@ -8,15 +8,15 @@ import { AUTH_ERROR } from '../../error/Auth';
 import { Tokens } from '../../types/Auth';
 
 /**
- * Функция для регистрации нового пользователя.
- * @param login Логин пользователя.
+ * Функция для входа пользователя.
+ * @param email Email пользователя.
  * @param password Пароль пользователя.
  * @returns Объект с ответом сервера.
  */
-async function postRegisterUser(login: string, password: string): Promise<void> {
+async function postLoginUser(email: string, password: string): Promise<void> {
   try {
-    const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Register, {
-      login,
+    const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Login, {
+      email,
       password,
     });
 
@@ -26,30 +26,28 @@ async function postRegisterUser(login: string, password: string): Promise<void> 
     await saveToken(REFRESH_TOKEN, refreshToken);
     await saveToken(TOKEN_TYPE, tokenType);
   } catch (error) {
-    console.error(AUTH_ERROR.Register, error);
+    throw error;
   }
 }
 
 /**
- * Функция для входа пользователя.
- * @param login Login пользователя.
+ * Функция для регистрации нового пользователя.
+ * @param name Имя пользователя.
+ * @param email Email пользователя.
  * @param password Пароль пользователя.
  * @returns Объект с ответом сервера.
  */
-async function postLoginUser(login: string, password: string): Promise<void> {
+async function postRegisterUser(name: string, email: string, password: string): Promise<void> {
   try {
-    const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Login, {
-      login,
+    await authenticationService.post(AUTH_ROUTES.Register, {
+      name,
+      email,
       password,
     });
 
-    const { accessToken, refreshToken, tokenType } = toCamelCase(data);
-
-    await saveToken(ACCESS_TOKEN, accessToken);
-    await saveToken(REFRESH_TOKEN, refreshToken);
-    await saveToken(TOKEN_TYPE, tokenType);
+    await postLoginUser(email, password);
   } catch (error) {
-    console.error(AUTH_ERROR.Login, error);
+    throw error;
   }
 }
 
@@ -63,8 +61,7 @@ async function getUserInfo(): Promise<User | null> {
 
     return data;
   } catch (error) {
-    console.error(AUTH_ERROR.UserInfo, error);
-    return null;
+    throw error;
   }
 }
 

@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { ButtonGradientProps } from "./types";
 import { useTheme } from '@rneui/themed';
+import { MainGradient } from '../MainGradient';
 
 export function ButtonGradient({
   title,
@@ -10,9 +10,6 @@ export function ButtonGradient({
   const {
     theme: {
       colors: {
-        main1,
-        main2,
-        main3,
         element2,
       }
     }
@@ -20,12 +17,7 @@ export function ButtonGradient({
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <LinearGradient
-        colors={[main1, main3, main2]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.gradient}
-      >
+      <MainGradient style={styles.gradient}>
         <Text
           style={{
             ...styles.buttonText,
@@ -34,7 +26,7 @@ export function ButtonGradient({
         >
           {title}
         </Text>
-      </LinearGradient>
+      </MainGradient>
     </TouchableOpacity>
   );
 }

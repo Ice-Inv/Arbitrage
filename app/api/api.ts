@@ -31,7 +31,7 @@ async function refreshAccessToken() {
   }
 
   try {
-    const response = await refreshService.post<Tokens>(AUTH_ROUTES.Refresh, { currentRefreshToken });
+    const response = await refreshService.put<Tokens>(AUTH_ROUTES.Refresh, { currentRefreshToken });
     const { accessToken, refreshToken, tokenType } = toCamelCase(response.data);
 
     // Сохраняем новые токены

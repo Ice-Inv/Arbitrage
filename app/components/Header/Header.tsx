@@ -36,7 +36,7 @@ export function Header({
     <LoaderContainer isLoading={isLoading}>
       <Padding style={styles.root}>
         {!isNotCircle && (
-          <Avatar name={user?.login} size="large" />
+          <Avatar name={user?.name} size="large" />
         )}
         <View
           style={{
@@ -54,7 +54,7 @@ export function Header({
                 color: mode === 'light' ? element1 : element2
               }}
             >
-              {title ? title : user?.login || 'Noname'}
+              {title ? title : user?.name || 'Noname'}
             </Text>
             {!title && (
               <Entypo

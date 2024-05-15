@@ -9,41 +9,47 @@ export function AuthProvider({
   children,
 }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState<AxiosError | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingInitial, setIsLoadingInitial] = useState(true);
 
   async function handlerUserInfo() {
     setIsLoading(true);
+    setError(null);
+
     try {
       const userInfo = await authService.getUserInfo();
       setUser(userInfo);
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
-  async function handleRegister(login: string, password: string) {
+  async function handleRegister(uname: string, email: string, password: string) {
     setIsLoading(true);
+    setError(null);
+
     try {
-      await authService.postRegisterUser(login, password);
+      await authService.postRegisterUser(uname, email, password);
       await handlerUserInfo();
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
-  async function handleLogin(login: string, password: string) {
+  async function handleLogin(email: string, password: string) {
     setIsLoading(true);
+    setError(null);
+
     try {
-      await authService.postLoginUser(login, password);
+      await authService.postLoginUser(email, password);
       await handlerUserInfo();
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
@@ -51,51 +57,59 @@ export function AuthProvider({
 
   async function handleLogout() {
     setIsLoading(true);
+    setError(null);
+
     try {
       const userData = await authService.getLogout();
       
       userData && setUser(null);
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
   async function handleTimezone(id: string, timezone: string) {
+    setIsLoading(true);
+    setError(null);
+
     try {
-      setIsLoading(true);
       const userTimezone = await authService.putTimezone(id, timezone);
       
       user && setUser((prev) => prev && ({...prev, timezone: userTimezone}));
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
   async function handleLocale(id: string, locale: string) {
+    setIsLoading(true);
+    setError(null);
+
     try {
-      setIsLoading(true);
       const userLocale = await authService.putLocale(id, locale);
       
       user && setUser((prev) => prev && ({...prev, locale: userLocale}));
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
   async function handleCurrency(id: string, currency: string) {
+    setIsLoading(true);
+    setError(null);
+
     try {
-      setIsLoading(true);
       const userCurrency = await authService.putCurrency(id, currency);
       
       user && setUser((prev) => prev && ({...prev, currency: userCurrency}));
     } catch (error) {
-      setError(error as AxiosError);
+      setError((error as Error).message);
     } finally {
       setIsLoading(false);
     }

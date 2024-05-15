@@ -1,20 +1,18 @@
 import { ReactNode } from "react";
 
 export type User = {
-  login: string;
+  name: string;
   iat: number;
   email: string | null;
-  timezone: string | null;
-  currency: string | null;
-  locale: string | null;
 }
 
 export type AuthContextProps = {
   user: User | null;
   isLoading: boolean;
+  error: string | null;
   userInfo: () => Promise<void>;
-  register: (login: string, password: string) => Promise<void>;
-  login: (login: string, password: string) => Promise<void>;
+  register: (uname: string, email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   setTimezone: (id: string, timezone: string) => Promise<void>;
   setLocale: (id: string, locale: string) => Promise<void>;

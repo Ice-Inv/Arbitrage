@@ -1,13 +1,12 @@
 import { useAuth } from "../../../../hooks/useAuth";
 import { useTextField, useToggle } from "../../../../hooks";
-import { useEffect } from "react";
 import { RegexpPattern } from "../../../../constants";
-import { ERROR_TEXT } from "./constants";
 
 export function useAuthorization() {
-  const { isLoading, login, register } = useAuth();
+  const { isLoading, login, register, error } = useAuth();
 
-  const [userLogin, userLoginParams] = useTextField({initValue: '', isRequired: true, regexp: RegexpPattern.changePassword});
+  const [uname, unameParams] = useTextField({initValue: '', isRequired: true, regexp: RegexpPattern.changePassword});
+  const [email, emailParams] = useTextField({initValue: '', isRequired: true});
   const [password, passwordParams] = useTextField({initValue: '', isRequired: true, regexp: RegexpPattern.changePassword});
   const [repeatPassword, repeatPasswordParams] = useTextField({initValue: ''});
 
@@ -20,7 +19,7 @@ export function useAuthorization() {
   }
   
   function validateLogin(): boolean {
-    return !(userLogin.value.length <= 5)
+    return !(uname.value.length <= 2)
   }
 
   const [isRegistration, handleIsRegistration] = useToggle();
@@ -32,17 +31,19 @@ export function useAuthorization() {
     //   !repeatPasswordParams.getValidate(validatePassword, ERROR_TEXT.PasswordEasy)
     // ) return;
 
-    register(userLogin.value, password.value)
+    register(uname.value, email.value, password.value)
   }
 
   function handleLogin() {
-    login(userLogin.value, password.value)
+    login(email.value, password.value)
   }
 
   return {
     isLoading,
-    userLogin,
+    error,
+    uname,
     password,
+    email,
     repeatPassword,
     handleRegister,
     handleLogin,

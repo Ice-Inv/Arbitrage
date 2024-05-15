@@ -8,9 +8,11 @@ import { useEffect } from "react";
 export function Auth() {
   const {
     isLoading,
-    userLogin,
+    uname,
+    error,
     password,
     repeatPassword,
+    email,
     handleRegister,
     handleLogin,
     isRegistration,
@@ -26,25 +28,43 @@ export function Auth() {
             <Text style={{...styles.title, color: theme.colors.element1}}>
               {isRegistration ? AUTH.signUp : AUTH.signIn}
             </Text>
-              <TextField {...userLogin} placeholder={PLACEHOLDER.username} />
+
+            {isRegistration && (
               <TextField
-                {...password}
-                placeholder={PLACEHOLDER.password}
+                {...uname}
+                placeholder={PLACEHOLDER.username}
+              />
+            )}
+
+            <TextField
+              {...email}
+              placeholder={PLACEHOLDER.email}
+            />
+
+            <TextField
+              {...password}
+              placeholder={PLACEHOLDER.password}
+              isSecure
+            />
+
+            {isRegistration && (
+              <TextField
+                {...repeatPassword}
+                placeholder={PLACEHOLDER.repeatPassword}
                 isSecure
               />
-              {isRegistration && (
-                <TextField
-                  {...repeatPassword}
-                  placeholder={PLACEHOLDER.repeatPassword}
-                  isSecure
-                />
-              )}
-            
+            )}
 
             <Button
               onPress={isRegistration ? handleRegister : handleLogin}
               title={isRegistration ? AUTH.signUp : AUTH.signIn}
             />
+
+            {error && (
+              <Text style={{...styles.pressableText, color: theme.colors.red1}}>
+                {error}
+              </Text>
+            )}
 
             <View style={styles.actionsContainer}>
               <ColorTheme />
