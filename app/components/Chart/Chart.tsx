@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 10,
     backgroundColor: '#F3F4F6',
-    borderRadius: 10,
+    borderRadius: 8,
   },
   chart: { height: 200, flex: 1, marginVertical: 10 },
 });
