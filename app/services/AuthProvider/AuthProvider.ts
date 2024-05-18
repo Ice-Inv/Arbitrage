@@ -16,7 +16,7 @@ import { Tokens } from '../../types/Auth';
 async function postLoginUser(email: string, password: string): Promise<void> {
   try {
     const { data } = await authenticationService.post<Tokens>(AUTH_ROUTES.Login, {
-      email,
+      email: email.toLowerCase(),
       password,
     });
 

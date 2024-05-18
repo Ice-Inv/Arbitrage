@@ -4,4 +4,5 @@ export type FieldProps = {
   placeholder: string;
   isSecure?: boolean;
   isDisable?: boolean;
+  style?: any;
 };

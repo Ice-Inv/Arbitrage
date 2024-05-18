@@ -1,6 +1,9 @@
 import { Layout } from "../../common";
 import { Header } from "../../components";
 import { Chart } from "../../components/Chart";
+import { LastDeal } from "../../components";
+import { RedirectAllDeal } from "./components/RedirectAllDeal";
+import {AddDeal} from "./components/AddDeal";
 
 const data = [150, 210, 240, 195, 385, 420, 280, 250, 360, 500, 320];
   const dates = [
@@ -13,8 +16,11 @@ const data = [150, 210, 240, 195, 385, 420, 280, 250, 360, 500, 320];
 export function Income() {
   return (
     <Layout>
-      <Header title="Income" />
+      <Header title="Доходы" />
       <Chart data={data} dates={dates} />
+      <LastDeal value={-12800} dynamicValueFirst={10.32} dynamicValueSecond={-3}/>
+      <RedirectAllDeal/>
+      <AddDeal/>
     </Layout>
   );
 }

@@ -15,7 +15,7 @@ export function MainBox({
   } = useTheme();
 
   return (
-    <View style={{ ...style, backgroundColor: element4, ...styles.root }}>
+    <View style={{ backgroundColor: element4, ...styles.root, ...style }}>
       {children}
     </View>
   );
@@ -24,7 +24,8 @@ export function MainBox({
 const styles = StyleSheet.create({
   root: {
     borderRadius: 8,
-    paddingVertical: 6,
+    paddingVertical: 12,
     paddingHorizontal: 12,
+    marginTop: 15,
   },
 })

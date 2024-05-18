@@ -8,6 +8,7 @@ export function TextField({
   placeholder,
   isSecure,
   isDisable = false,
+  style,
 }: FieldProps) {
   const {theme} = useTheme();
 
@@ -25,6 +26,7 @@ export function TextField({
         marginTop: 15,
         padding: 12,
         width: '100%',
+        ...style,
       }}
       placeholderTextColor={theme.colors.element3}
       editable={!isDisable}

@@ -18,10 +18,10 @@ export function Button({
         borderRadius: 8,
         width: '100%',
         marginVertical: 16,
-        paddingVertical: 10,
+        height: 45,
       }}
     >
-      <Text style={{color: theme.colors.element2, textAlign: 'center', fontSize: 16, fontWeight: 'bold'}}>
+      <Text style={{color: theme.colors.element2, textAlign: 'center', fontSize: 16, fontWeight: 'bold', lineHeight: 45}}>
         {title}
       </Text>
     </TouchableHighlight>

@@ -36,14 +36,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     marginTop: 15,
+    height: 45,
   },
   gradient: {
-    paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
   },
   buttonText: {
     fontWeight: 'bold',
     fontSize: 16,
+    lineHeight: 45,
   },
 });
