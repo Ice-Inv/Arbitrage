@@ -15,15 +15,15 @@ export type ProfitChains = {
   /**
    * Прибыльность цепочки в % на 100$.
    */
-  profit100: string;
+  profit100: number;
   /**
    * Прибыльность цепочки в % на 1000$.
    */
-  profit1000: string;
+  profit1000: number;
   /**
    * Прибыльность цепочки в % на 10000$.
    */
-  profit10000: string;
+  profit10000: number;
 }
 
 /**
@@ -157,17 +157,17 @@ export type ChainsFilters = {
    */
   isAllPlatformList: boolean;
   /**
-   * Список валют в цепочке.
+   * Список валют в фильтре.
    */
-  currencyList: string;
+  currencyList: string[];
   /**
-   * Список платформ в цепочке.
+   * Список платформ в фильтре.
    */
-  platformList: string;
+  platformList: string[];
   /**
    * Минимальная длина цепочки.
    */
-  minLengthChains: string;
+  maxLengthChains: string;
   /**
    * Прибыльность цепочки на различных точках.
    */
@@ -183,4 +183,32 @@ export type ChainsContextProps = {
    * Представляет список всех доступных цепочек.
    */
   chains: ChainsData[];
+  /**
+   * Предоставляет информацию о текущих настройках фильтров
+   */
+  filterSettings: ChainsFilters;
+  /**
+   * Предоставляет информацию о различных ошибках
+   */
+  error: string | null;
+  /**
+   * Предоставляет информацию о состоянии загрузки
+   */
+  isLoading: boolean;
+  /**
+   * Функция для установления настроек фильтрации и фильтрации цепочек
+   * @param settings - настройки по которым будет производится фильтрация цепочек
+   */
+  handleFilterChains: (settings: ChainsFilters) => void;
+  /**
+   * Функция для сброса настроек фильтрации
+   */
+  handleResetFilterChains: () => void;
+  /**
+   * Функция для расчета прибыльности цепочки по заданному значению
+   * @param profit - сумма, при которой юзер хочет узнать доход цепочки
+   * @param id - уникальный идентификатор цепочки
+   * @returns Возвращает сумму дохода цепочки
+   */
+  handleGetProfitChain: (profit: string, id: string) => string;
 }
