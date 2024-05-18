@@ -3,6 +3,10 @@
  */
 export type LastDealProps = {
   /**
+   * Заголовок компонента
+   */
+  label: string;
+  /**
    * Результат сделки
    */
   value: number;

@@ -4,8 +4,7 @@ import { baseService, authenticationService } from '../../api';
 import { saveToken, removeToken, toCamelCase } from '../../utils';
 import { ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE } from '../../constants';
 import { AUTH_ROUTES } from '../../routes/Auth';
-import { AUTH_ERROR } from '../../error/Auth';
-import { Tokens } from '../../types/Auth';
+import { Tokens } from '../../types';
 
 /**
  * Функция для входа пользователя.

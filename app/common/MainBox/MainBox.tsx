@@ -1,6 +1,6 @@
-import {useTheme} from "@rneui/themed";
-import {View, StyleSheet} from "react-native";
-import {MainBoxProps} from "./types";
+import { useTheme } from "@rneui/themed";
+import { View, StyleSheet } from "react-native";
+import { MainBoxProps } from "./types";
 
 export function MainBox({
    children,

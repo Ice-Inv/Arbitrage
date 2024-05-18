@@ -5,6 +5,7 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import {LastDealProps} from "./types";
 
 export function LastDeal({
+  label,
   value,
   dynamicValueFirst,
   dynamicValueSecond,
@@ -29,7 +30,7 @@ export function LastDeal({
         <View style={{ ...styles.container }}>
           <View>
             <Text style={{ ...styles.title, color: element1 }}>
-              Последняя сделка
+              {label}
             </Text>
             <View style={styles.costContainer}>
               <Text style={{ ...styles.cost, color: element1 }}>
@@ -37,10 +38,10 @@ export function LastDeal({
               </Text>
               <View style={{ ...styles.paramContainer, backgroundColor: dynamicValueFirst > 0 ? green3 : red3}}>
                 <Text style={{ ...styles.paramContent, color: dynamicValueFirst > 0 ? green1 : red1 }}>
-                  {dynamicValueFirst}
+                  {(dynamicValueFirst > 0 ? `+${dynamicValueFirst}` : dynamicValueFirst) ?? 'N/A'}
                 </Text>
                 <Text style={{ ...styles.paramContent, color: dynamicValueFirst > 0 ? green1 : red1 }}>
-                  {dynamicValueSecond}%
+                  {(dynamicValueSecond > 0 ? `+${dynamicValueSecond}` : dynamicValueSecond) ?? 'N/A'}%
                 </Text>
               </View>
             </View>

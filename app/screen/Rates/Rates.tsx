@@ -1,10 +1,10 @@
-import { Text } from "react-native";
 import { Layout } from "../../common";
+import {Header} from "../../components";
 
 export function Rates() {
   return (
     <Layout>
-      <Text>Rates</Text>
+      <Header title="Выбрать тариф" isNotCircle />
     </Layout>
   );
 }

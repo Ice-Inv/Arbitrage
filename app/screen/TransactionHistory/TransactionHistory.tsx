@@ -1,12 +1,25 @@
-import { Text } from "react-native";
 import { Layout } from "../../common";
-import {Header} from "../../components";
+import { Header, LastDeal } from "../../components";
+import { useTransactionHistory } from "./hooks/useTransactionHistory";
+import { View } from "react-native";
 
 export function TransactionHistory() {
+  const {
+    transactionHistory
+  } = useTransactionHistory();
+
   return (
     <Layout>
       <Header title="История доходов" isNotCircle />
-      <Text>TransactionHistory</Text>
+      {transactionHistory.map((transaction, index) => (
+        <LastDeal
+          label={transaction.label}
+          value={transaction.value}
+          dynamicValueFirst={transaction.dynamicValueFirst}
+          dynamicValueSecond={transaction.dynamicValueSecond}
+        />
+      ))}
+      <View style={{ marginBottom: 20 }}/>
     </Layout>
   );
 }
