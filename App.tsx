@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@rneui/themed';
-import { AuthProvider } from './app/providers';
+import { AuthProvider, ChainsProvider } from './app/providers';
 import { MainTheme } from './app/themes';
 import { Container } from './app/components';
 import Navigation from './app/components/Navigation/Navigation';
@@ -7,11 +7,13 @@ import Navigation from './app/components/Navigation/Navigation';
 export default function App() {
   return (
     <AuthProvider>
-      <ThemeProvider theme={MainTheme}>
-        <Container>
-          <Navigation/>
-        </Container>
-      </ThemeProvider>
+      <ChainsProvider>
+        <ThemeProvider theme={MainTheme}>
+          <Container>
+            <Navigation/>
+          </Container>
+        </ThemeProvider>
+      </ChainsProvider>
     </AuthProvider>
   );
 }

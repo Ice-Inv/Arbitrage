@@ -1,7 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { AuthContextProps, User, AuthProviderProps} from './types';
 import { authService } from "../../services/AuthProvider";
-import { AxiosError } from "axios";
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 

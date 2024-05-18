@@ -4,9 +4,12 @@ import { useUpdatePassword } from "./hooks/useUpdatePassword";
 
 export function UpdatePassword() {
   const {
+    isLoading,
+    error,
     currentPassword,
     newPassword,
     repeatNewPassword,
+    handlerUpdatePassword,
   } = useUpdatePassword();
 
   return (
@@ -17,7 +20,7 @@ export function UpdatePassword() {
         <TextField {...currentPassword } placeholder="Введите старый пароль" isSecure />
         <TextField {...newPassword } placeholder="Введите новый пароль" isSecure />
         <TextField {...repeatNewPassword } placeholder="Повторите новый пароль" isSecure />
-        <Button title="Обновить пароль" onPress={() => {}} />
+        <Button title="Обновить пароль" onPress={handlerUpdatePassword} />
       </Padding>
     </Layout>
   );
