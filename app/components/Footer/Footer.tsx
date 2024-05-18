@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 import { MENU } from "./constants"
 import { NavItem } from "./components/NavItem"
 import { FooterProps } from "./components/NavItem/types"
-import { Padding } from "../../common/Padding"
+import { Padding } from "../../common"
 
 export function Footer({
   navigate,
