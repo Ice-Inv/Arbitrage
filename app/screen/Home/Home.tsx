@@ -3,6 +3,7 @@ import {Header, LastDeal} from "../../components";
 import {Chart} from "../../components/Chart";
 import {RenewSubscription} from "./components/RenewSubscription";
 import {InvitationCode} from "./components/InvitationСode";
+import ScrollableButtonSlider from "./components/ScrollableButtonSlider/ScrollableButtonSlider";
 
 export function Home() {
   const data = [150, 210, 240, 195, 385, 420, 280, 250, 360, 500, 320];
@@ -16,6 +17,7 @@ export function Home() {
   return (
     <Layout>
       <Header />
+      <ScrollableButtonSlider/>
       <Chart data={data} dates={dates} />
       <InvitationCode code={'EFR4-M5DF-LKIO-A9H0-7HCP'}/>
       <LastDeal label={'Последняя сделка'} value={12450.86} dynamicValueFirst={14.2} dynamicValueSecond={20.4}/>
