@@ -9,6 +9,7 @@ export function Select({
   options,
   value,
   setValue,
+  placeholder = '',
   style = {},
 }: SelectProps) {
   const {
@@ -31,7 +32,7 @@ export function Select({
         multiple={true}
         mode="BADGE"
         badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
-        placeholder="Выберите валюты"
+        placeholder={placeholder}
         style={{ ...styles.picker, backgroundColor: element4 }}
       />
     </View>

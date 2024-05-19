@@ -5,6 +5,8 @@ import { DEFAULT_SETTINGS_FILTERS } from "./constants";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES_WEB_SOCKET } from "./routes";
 import { CHAINS_ERROR } from "../../error/Chains";
+import { getToken } from "../../utils";
+import { ACCESS_TOKEN } from "../../constants";
 
 export const ChainsContext = createContext<ChainsContextProps>({} as ChainsContextProps);
 
@@ -18,6 +20,8 @@ export function ChainsProvider({
   const [chains, setChains] = useState<ChainsData[]>([]);
   const [filteredChains, setFilteredChains] = useState<ChainsData[]>([]);
   const [filterSettings, setFilterSettings] = useState<ChainsFilters>(DEFAULT_SETTINGS_FILTERS);
+
+  const [accessToken, setAccessToken] = useState<string | null>('');
 
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeout = useRef<number | null>(null);
@@ -78,26 +82,28 @@ export function ChainsProvider({
       return;
     }
 
-    // todo Временно скрыто
     // Закрываем старое соединение, если оно существует
-    // if (ws.current) {
-    //   ws.current.close();
-    // }
+    if (ws.current) {
+      ws.current.close();
+    }
 
-    // ws.current = new WebSocket(ROUTES_WEB_SOCKET);
+    ws.current = new WebSocket(`${ROUTES_WEB_SOCKET}`);
 
-    // ws.current.onopen = () => {
-    //   console.log('WebSocket соединение открыто');
-    // };
+    console.log('active');
 
-    // ws.current.onmessage = (event: MessageEvent) => {
-    //   setChains(event.data);
-    //   filterChains(filterSettings, event.data);
-    // };
+    ws.current.onopen = () => {
+      console.log('WebSocket соединение открыто');
+    };
 
-    // ws.current.onerror = (error: Event) => {
-    //   setError(CHAINS_ERROR.ON_ERROR);
-    // };
+    ws.current.onmessage = (event: MessageEvent) => {
+      console.log(event);
+      // setChains(event.data);
+      // filterChains(filterSettings, event.data);
+    };
+
+    ws.current.onerror = (error: Event) => {
+      setError(CHAINS_ERROR.ON_ERROR);
+    };
 
     // ws.current.onclose = (event: CloseEvent) => {
     //   setError(CHAINS_ERROR.ON_CLOSE);
@@ -123,7 +129,7 @@ export function ChainsProvider({
    * @dependency {User | null} user - состояние управляющие запросом на подключение/отключение WebSocket.
    */
   useEffect(() => {
-    if (!user) return;
+    if (!user || !accessToken) return;
 
     connectWebSocket();
 
@@ -131,7 +137,7 @@ export function ChainsProvider({
       if (ws.current) ws.current.close();
       if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current);
     };
-  }, [user]);
+  }, [user, accessToken]);
 
   /**
    * Функция устанавливающая настройки поиска
@@ -160,7 +166,14 @@ export function ChainsProvider({
     return '';
   }
 
+  async function getTokens() {
+    const token = await getToken(ACCESS_TOKEN);
+
+    setAccessToken(token);
+  }
+
   useEffect(() => {
+    getTokens();
     setIsLoadingInitial(false);
   }, []);
 

@@ -45,6 +45,10 @@ export type SelectProps = {
    */
   setValue: Dispatch<SetStateAction<ValueType[]>>
   /**
+   * Подпись к выпадающему списку
+   */
+  placeholder?: string;
+  /**
    * Кастомные стили для компонента
    */
   style?: Partial<StyleProp<ViewStyle>>
