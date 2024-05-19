@@ -64,7 +64,6 @@ export function Header({
               />
             )}
           </TouchableOpacity>
-
           <Rate />
         </View>
       </Padding>

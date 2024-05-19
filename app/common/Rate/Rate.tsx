@@ -1,37 +1,38 @@
 import { useTheme } from "@rneui/themed";
-import { Text, StyleSheet } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
+import {Text, StyleSheet, TouchableOpacity} from "react-native";
+import { MainGradient } from "../MainGradient";
+import {NAVIGATE} from "../../constants";
+import {useNavigation} from "@react-navigation/native";
 
 export function Rate() {
+  const { navigate } = useNavigation();
   const {
     theme: {
       mode,
       colors: {
         element1,
         element2,
-        main1,
-        main2,
-        main3,
       }
     }
   } = useTheme();
 
+  function handleNavigate() {
+    navigate(NAVIGATE.Rates);
+  }
+
   return (
-    <LinearGradient
-      style={styles.root}
-      colors={[main1, main3, main2]}
-      start={{ x: 0, y: 1 }}
-      end={{ x: 1, y: 0 }}
-    >
-      <Text
-        style={{
-          ...styles.text,
-          color: mode === 'light' ? element2 : element1,
-        }}
-      >
-        Premium
-      </Text>
-    </LinearGradient>
+    <TouchableOpacity onPress={handleNavigate}>
+      <MainGradient style={styles.root}>
+        <Text
+          style={{
+            ...styles.text,
+            color: mode === 'light' ? element2 : element1,
+          }}
+        >
+          Premium
+        </Text>
+      </MainGradient>
+    </TouchableOpacity>
   );
 }
 
