@@ -38,7 +38,8 @@ export function Rate() {
 const styles = StyleSheet.create({
   root: {
     height: 34,
-    paddingHorizontal: 30,
+    width: 130,
+    alignItems: 'center',
     borderRadius: 30,
     backgroundColor: '#000',
   },

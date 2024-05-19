@@ -11,3 +11,4 @@ export * from './ColorTheme';
 export * from './Rate';
 export * from './ButtonGradient';
 export * from './MainBox';
+export * from './MainGradient';

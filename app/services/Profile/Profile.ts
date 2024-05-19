@@ -9,8 +9,8 @@ import { ROUTES } from "./routes";
 async function putUpdatePassword(prevPassword: string, newPassword: string): Promise<void> {
   try {
     await baseService.put(ROUTES.UpdatePassword, {
-      prevPassword,
-      newPassword,
+      current_password: prevPassword,
+      new_password: newPassword,
     });
   } catch (error) {
     throw error;

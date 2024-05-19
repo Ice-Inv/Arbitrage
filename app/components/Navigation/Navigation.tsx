@@ -80,7 +80,11 @@ function Navigation() {
   return (
     <>
       <NavigationContainer ref={ref}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           {user
             ? (
               <>
