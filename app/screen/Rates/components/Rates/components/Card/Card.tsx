@@ -28,8 +28,8 @@ export function Card({
           <AntDesign name="check" size={18} color="black" />
         </View>
       </View>
-      {description.map((item, index) => (
-        <View style={styles.spaceBetweenRates}>
+      {description.map((item, key) => (
+        <View key={key} style={styles.spaceBetweenRates}>
           <Text style={{ ...styles.textRatesContent, color: element1 }}>{item.text}</Text>
           {item.isAvailability ? (
             <AntDesign name="check" size={24} color={green1} />

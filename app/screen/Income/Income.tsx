@@ -16,7 +16,7 @@ const dates = [
 export function Income() {
   return (
     <Layout>
-      <Header title="Доходы" />
+      <Header title="Ведение доходов"  isNotCircle />
       <Chart data={data} dates={dates} />
       <LastDeal label={'Последняя сделка'} value={-12800} dynamicValueFirst={10.32} dynamicValueSecond={-3}/>
       <RedirectAllDeal/>
