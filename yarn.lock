@@ -6389,6 +6389,11 @@ react-native-dotenv@^3.4.11:
   dependencies:
     dotenv "^16.4.5"
 
+react-native-dropdown-picker@^5.4.6:
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.6.tgz#3736fc468de4a295e4df8d1f65ed2eadaf9b445f"
+  integrity sha512-T1XBHbE++M6aRU3wFYw3MvcOuabhWZ29RK/Ivdls2r1ZkZ62iEBZknLUPeVLMX3x6iUxj4Zgr3X2DGlEGXeHsA==
+
 react-native-ratings@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-8.1.0.tgz#3fa9ad29128dc3a88e59518ba151e61c59dd0647"
@@ -6441,6 +6446,13 @@ react-native-svg@^6.2.1:
     color "^2.0.1"
     lodash "^4.16.6"
     pegjs "^0.10.0"
+
+react-native-switch@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-switch/-/react-native-switch-1.5.1.tgz#da032f66547053aa004c7a159422dbca8fadd944"
+  integrity sha512-nfuPrrPKzeZL1mQH0u1rlEGv9W1+okU/xOcNNaDNz/LhSdzWOZ04ogJ4iEj7Sth3hkBxv4XwFQZTgCc07we+cg==
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-web@~0.19.6:
   version "0.19.11"

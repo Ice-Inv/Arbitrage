@@ -172,7 +172,7 @@ export function ChainsProvider({
     handleFilterChains,
     handleResetFilterChains,
     handleGetProfitChain,
-  }), []);
+  }), [isLoading, filteredChains, filterSettings]);
 
   return (
     <ChainsContext.Provider value={value}>

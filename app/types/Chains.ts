@@ -165,7 +165,7 @@ export type ChainsFilters = {
    */
   platformList: string[];
   /**
-   * Минимальная длина цепочки.
+   * Максимальная длина цепочки.
    */
   maxLengthChains: string;
   /**

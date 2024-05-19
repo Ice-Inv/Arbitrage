@@ -1,7 +1,6 @@
-import { View, StyleSheet } from "react-native";
-import { MainBox } from "../../../../../../common";
+import { StyleSheet } from "react-native";
+import { InfoScreen, MainBox } from "../../../../../../common";
 import { TotalFound } from "./components/TotalFound";
-import { InfoScreen } from "./components/InfoScreen";
 import { Sorting } from "./components/Sorting";
 
 export function ChainsInfo() {

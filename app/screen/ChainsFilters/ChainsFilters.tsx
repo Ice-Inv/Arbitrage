@@ -1,10 +1,12 @@
-import { Text } from "react-native";
 import { Layout } from "../../common";
+import { FiltersForm } from "./components/FiltersForm";
+import { Header } from "./components/Header";
 
 export function ChainsFilters() {
   return (
     <Layout>
-      <Text>ChainsFilters</Text>
+      <Header />
+      <FiltersForm />
     </Layout>
   );
 }

@@ -12,3 +12,6 @@ export * from './Rate';
 export * from './ButtonGradient';
 export * from './MainBox';
 export * from './MainGradient';
+export * from './InfoScreen';
+export * from './Switch';
+export * from './Select';
