@@ -87,16 +87,14 @@ export function ChainsProvider({
       ws.current.close();
     }
 
-    ws.current = new WebSocket(`${ROUTES_WEB_SOCKET}`);
-
-    console.log('active');
+    ws.current = new WebSocket(`${ROUTES_WEB_SOCKET}?token=${accessToken}`);
 
     ws.current.onopen = () => {
       console.log('WebSocket соединение открыто');
     };
 
     ws.current.onmessage = (event: MessageEvent) => {
-      console.log(event);
+      console.log(event.data);
       // setChains(event.data);
       // filterChains(filterSettings, event.data);
     };
@@ -105,12 +103,12 @@ export function ChainsProvider({
       setError(CHAINS_ERROR.ON_ERROR);
     };
 
-    // ws.current.onclose = (event: CloseEvent) => {
-    //   setError(CHAINS_ERROR.ON_CLOSE);
-    //   if (!event.wasClean) {
-    //     reconnectTimeout.current = setTimeout(connectWebSocket, 10000);
-    //   }
-    // };
+    ws.current.onclose = (event: CloseEvent) => {
+      setError(CHAINS_ERROR.ON_CLOSE);
+      if (!event.wasClean) {
+        reconnectTimeout.current = setTimeout(connectWebSocket, 10000);
+      }
+    };
   };
 
   /**
@@ -171,6 +169,10 @@ export function ChainsProvider({
 
     setAccessToken(token);
   }
+
+  useEffect(() => {
+    getTokens();
+  }, [user]);
 
   useEffect(() => {
     getTokens();
