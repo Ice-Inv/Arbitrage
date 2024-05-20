@@ -9,4 +9,6 @@ export const LABEL_FORM = {
   profit1000: 'Прибыльность при 1000$',
   profit10000: 'Прибыльность при 10000$',
   submit: 'Обновить цепочки',
+  currencies: 'Список валют',
+  platforms: 'Список платформ',
 };
