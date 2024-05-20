@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { AllInfoProps } from "./type";
 import { Profit } from "../Profit";
+import { Steps } from "./components/Steps";
 
 export function AllInfo({
   profit,
@@ -10,6 +11,7 @@ export function AllInfo({
   return (
     <View>
       <Profit profit={profit} />
+      <Steps steps={steps} />
     </View>
   );
 }
