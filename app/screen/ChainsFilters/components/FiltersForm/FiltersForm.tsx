@@ -52,8 +52,8 @@ export function FiltersForm() {
         placeholder={LABEL_FORM.id}
       />
 
-      <Select { ...currencyList } options={[]} />
-      <Select { ...platformList } options={[]} />
+      <Select { ...currencyList } placeholder={'Выбранные валюты'} options={[]} />
+      <Select { ...platformList } placeholder={'Выбранные платформы'} options={[]} />
 
       {/* Максимальная длина цепочки */}
       <TextField

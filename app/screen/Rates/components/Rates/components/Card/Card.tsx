@@ -20,6 +20,7 @@ export function Card({
       }
     }
   } = useTheme();
+
   return(
     <MainBox>
       <View style={styles.spaceBetween}>

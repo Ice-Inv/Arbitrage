@@ -8,6 +8,7 @@ export function ScrollableButtonSlider() {
   const buttons = [
     { imageUri: "https://images.squarespace-cdn.com/content/v1/5dbf25911ece6c59d374a929/c659bd44-4ecd-469b-a5ea-e2fa26418bff/okx+cryptocurrency+exchange+logo+2022.png", linkUri: "https://www.okx.com" },
     { imageUri: "https://avatars.dzeninfra.ru/get-zen_doc/5324345/pub_636a81183817886a4cabee7d_636a811d8fe4080da6fbf50e/scale_1200", linkUri: "https://www.bybit.com" },
+    { imageUri: "https://static2.tgstat.ru/channels/_0/39/39040f624ee929189bdf45dfcf2b1f79.jpg", linkUri: "https://bilaxy.com/"},
     { imageUri: "https://bitgid.com/wp-content/uploads/2021/06/Huobi-cover-21.jpg", linkUri: "https://www.htx.com" },
   ];
 
