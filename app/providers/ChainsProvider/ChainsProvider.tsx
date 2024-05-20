@@ -7,6 +7,7 @@ import { ROUTES_WEB_SOCKET } from "./routes";
 import { CHAINS_ERROR } from "../../error/Chains";
 import { getToken } from "../../utils";
 import { ACCESS_TOKEN } from "../../constants";
+import { getDataChainsFromResponse } from "./utils";
 
 export const ChainsContext = createContext<ChainsContextProps>({} as ChainsContextProps);
 
@@ -44,30 +45,30 @@ export function ChainsProvider({
 
     setFilteredChains(currentChains.filter((chain) => {
       // Проверка цепочки на id
-      if (id && chain.id !== id) return;
+      if (id && chain.id !== id) return false;
 
       // Проверка на длину цепочки
-      if (maxLengthChains && chain.length > Number(maxLengthChains)) return;
+      if (maxLengthChains && chain.length > Number(maxLengthChains)) return false;
 
       // Проверка на валюты
-      if (isAllCurrencyList && currencyList.length && !chain.currencyList.every((cur) => currencyList.includes(cur))) return;
-      if (currencyList.length && !chain.currencyList.some((cur) => currencyList.includes(cur))) return;
+      if (isAllCurrencyList && currencyList.length && !chain.currencyList.every((cur) => currencyList.includes(cur))) return false;
+      if (currencyList.length && !chain.currencyList.some((cur) => currencyList.includes(cur))) return false;
 
       // Проверка на платформы
-      if (isAllPlatformList && platformList.length && !chain.platformList.every((cur) => platformList.includes(cur))) return;
-      if (platformList.length && !chain.platformList.some((cur) => platformList.includes(cur))) return;
+      if (isAllPlatformList && platformList.length && !chain.platformList.every((cur) => platformList.includes(cur))) return false;
+      if (platformList.length && !chain.platformList.some((cur) => platformList.includes(cur))) return false;
 
       // Проверка прибыльности на 100
-      if (profit.profit100.minValue && Number(profit.profit100.minValue) > chain.profit.profit100) return;
-      if (profit.profit100.maxValue && Number(profit.profit100.maxValue) < chain.profit.profit100) return;
+      if (profit.profit100.minValue && (!chain.profit.profit100 || Number(profit.profit100.minValue) > chain.profit.profit100)) return false;
+      if (profit.profit100.maxValue && (!chain.profit.profit100 || Number(profit.profit100.maxValue) < chain.profit.profit100)) return false;
 
       // Проверка прибыльности на 1000
-      if (profit.profit1000.minValue && Number(profit.profit1000.minValue) > chain.profit.profit100) return;
-      if (profit.profit1000.maxValue && Number(profit.profit1000.maxValue) < chain.profit.profit100) return;
+      if (profit.profit1000.minValue && (!chain.profit.profit1000 || Number(profit.profit1000.minValue) > chain.profit.profit1000)) return false;
+      if (profit.profit1000.maxValue && (!chain.profit.profit1000 || Number(profit.profit1000.maxValue) < chain.profit.profit1000)) return false;
 
       // Проверка прибыльности на 10000
-      if (profit.profit10000.minValue && Number(profit.profit10000.minValue) > chain.profit.profit100) return;
-      if (profit.profit10000.maxValue && Number(profit.profit10000.maxValue) < chain.profit.profit100) return;
+      if (profit.profit10000.minValue && (!chain.profit.profit10000 || Number(profit.profit10000.minValue) > chain.profit.profit10000)) return false;
+      if (profit.profit10000.maxValue && (!chain.profit.profit10000 || Number(profit.profit10000.maxValue) < chain.profit.profit10000)) return false;
 
       return true;
     }));
@@ -94,9 +95,10 @@ export function ChainsProvider({
     };
 
     ws.current.onmessage = (event: MessageEvent) => {
-      console.log(event.data);
-      // setChains(event.data);
-      // filterChains(filterSettings, event.data);
+      const chains = getDataChainsFromResponse(JSON.parse(event.data));
+
+      setChains(chains);
+      filterChains(filterSettings, chains);
     };
 
     ws.current.onerror = (error: Event) => {
@@ -104,6 +106,7 @@ export function ChainsProvider({
     };
 
     ws.current.onclose = (event: CloseEvent) => {
+      console.log('WebSocket соединение закрыто');
       setError(CHAINS_ERROR.ON_CLOSE);
       if (!event.wasClean) {
         reconnectTimeout.current = setTimeout(connectWebSocket, 10000);
@@ -171,6 +174,11 @@ export function ChainsProvider({
   }
 
   useEffect(() => {
+    if (!user) {
+      if (ws.current) ws.current.close();
+      if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current);
+    }
+
     getTokens();
   }, [user]);
 

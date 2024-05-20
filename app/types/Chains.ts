@@ -1,11 +1,47 @@
 /**
- * Перечень статусов, которые могут быть у цепочки.
+ * Предоставляет информацию о ликвидных курсах пришедших с сервера
  */
-export enum StatusChains {
-  /**
-   * Цепочка активна.
-   */
-  ACTIVE = 'ACTIVE',
+export type LiquidityRate = {
+  cost: number;
+  volume: number;
+}
+
+/**
+ * Предоставляет информацию о шаге курсов пришедших с сервера
+ */
+export type Course = {
+  id: number;
+  platform_from: string;
+  platform_to: string;
+  currency_from: string;
+  currency_to: string;
+  best_price: number;
+  liquidity_rate: LiquidityRate[] | null;
+  is_open: true;
+  last_update: Date | null;
+}
+
+/**
+ * Предоставляет информацию о данных цепочек пришедших с сервера
+ */
+export type ChainsResponse = {
+  id: number;
+  rate_100_percent: number | null;
+  rate_1000_percent: number | null;
+  rate_10000_percent: number | null;
+  avg_rate100_percent: number | null;
+  avg_rate1000_percent: number | null;
+  avg_rate10000_percent: number | null;
+  courses: Course[];
+  deal_cnt: number;
+  last_update: Date;
+  creation_time: Date;
+}
+
+export type NecessaryInformation = {
+  currencyList: string[];
+  platformList: string[];
+  isOpen: boolean;
 }
 
 /**
@@ -15,21 +51,25 @@ export type ProfitChains = {
   /**
    * Прибыльность цепочки в % на 100$.
    */
-  profit100: number;
+  profit100: number | null;
   /**
    * Прибыльность цепочки в % на 1000$.
    */
-  profit1000: number;
+  profit1000: number | null;
   /**
    * Прибыльность цепочки в % на 10000$.
    */
-  profit10000: number;
+  profit10000: number | null;
 }
 
 /**
  * Подробная информация о шагах цепочки.
  */
 export type StepsChain = {
+  /**
+   * Уникальны идентификатор шага цепочки
+   */
+  id: number;
   /**
    * Валюта начала.
    */
@@ -49,21 +89,15 @@ export type StepsChain = {
   /**
    * Ссылка на биржу на данный шаг.
    */
-  link: string
-}
-
-/**
- * Истории доходности цепочки.
- */
-export type ChartChain = {
+  link: string;
   /**
-   * Значение доходности.
+   * Доступен ли данный шаг для обмена
    */
-  value: number;
+  isOpen: boolean;
   /**
-   * Время, когда произошла эта доходность.
+   * Лучший курс обмена на данный момент
    */
-  date: Date;
+  bestPrice: number;
 }
 
 /**
@@ -83,13 +117,13 @@ export type ChainsData = {
    */
   residenceTime: Date;
   /**
-   * Статус работы цепочки.
-   */
-  status: StatusChains;
-  /**
    * Данные о прибыльности цепочек на нескольких точек прибыльности.
    */
   profit: ProfitChains;
+  /**
+   * Средняя доходность прибыльности цепочки.
+   */
+  avgProfit: ProfitChains;
   /**
    * Список валют в цепочке.
    */
@@ -103,9 +137,9 @@ export type ChainsData = {
    */
   steps: StepsChain[];
   /**
-   * Информация об истории доходности цепочки.
+   * Доступен ли вся цепочка для обмена
    */
-  chart: ChartChain[];
+  isOpen: boolean;
 }
 
 /**

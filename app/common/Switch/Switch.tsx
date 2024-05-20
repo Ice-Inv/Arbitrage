@@ -11,7 +11,7 @@ export function Switch({
     theme: {
       colors: {
         green1,
-        red1,
+        main1,
         element2,
       },
     },
@@ -27,7 +27,7 @@ export function Switch({
       circleSize={30}
       barHeight={36}
       backgroundActive={green1}
-      backgroundInactive={red1}
+      backgroundInactive={main1}
       circleActiveColor={element2}
       circleInActiveColor={element2}
       circleBorderWidth={0}
