@@ -1,6 +1,8 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { AuthContextProps, User, AuthProviderProps} from './types';
 import { authService } from "../../services/AuthProvider";
+import { getToken } from "../../utils";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
@@ -11,6 +13,8 @@ export function AuthProvider({
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingInitial, setIsLoadingInitial] = useState(true);
+  const [accessToken, setAccessToken] = useState<string | null>('');
+  const [refreshToken, setRefreshToken] = useState<string | null>('');
 
   async function handlerUserInfo() {
     setIsLoading(true);
@@ -114,8 +118,24 @@ export function AuthProvider({
     }
   }
 
+  async function getTokens() {
+    const tokens = await Promise.all([
+      getToken(ACCESS_TOKEN),
+      getToken(REFRESH_TOKEN),
+    ]);
+
+    setAccessToken(tokens[0]);
+    setRefreshToken(tokens[1]);
+  }
+
   useEffect(() => {
+    if (!accessToken || !refreshToken) return;
+
     handlerUserInfo();
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    getTokens();
     setIsLoadingInitial(false);
   }, []);
 

@@ -13,6 +13,7 @@ export function TransactionHistory() {
       <Header title="История доходов" isNotCircle />
       {transactionHistory.map((transaction, index) => (
         <LastDeal
+          key={index}
           label={transaction.label}
           value={transaction.value}
           dynamicValueFirst={transaction.dynamicValueFirst}
