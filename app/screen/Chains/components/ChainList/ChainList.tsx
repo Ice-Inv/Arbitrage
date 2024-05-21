@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { Padding } from "../../../../common";
 import { useChainsList } from "./hooks/useChainsList";
 import { Chain } from "./components/Chain";
+import { NoData } from "./components/NoData";
 
 export function ChainList() {
   const {
@@ -9,8 +10,12 @@ export function ChainList() {
   } = useChainsList();
 
   return (
-    <Padding>
-      {chains.map((chain) => <Chain key={chain.id} chainParams={chain} />)}
+    <Padding style={{ marginBottom: 20 }}>
+      {chains.length > 0 ? (
+        chains.map((chain) => <Chain key={chain.id} chainParams={chain} />)
+      ) : (
+        <NoData />
+      )}
     </Padding>
   );
 }
