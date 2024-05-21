@@ -10,7 +10,13 @@ import { useSelect } from "../../../../../../hooks/useSelect";
  */
 export function useFilterForm() {
   const { navigate } = useNavigation();
-  const { filterSettings, handleResetFilterChains, handleFilterChains } = useChains();
+  const {
+    filterSettings,
+    currencyAllList,
+    platformAllList,
+    handleResetFilterChains,
+    handleFilterChains,
+  } = useChains();
 
   const [isEnabledCurrency, handleIsEnabledCurrency] = useToggle(filterSettings.isAllCurrencyList);
   const [isEnabledPlatform, handleIsEnabledPlatform] = useToggle(filterSettings.isAllPlatformList);
@@ -74,5 +80,7 @@ export function useFilterForm() {
     handleSetFilterChains,
     currencyList,
     platformList,
+    currencyAllList,
+    platformAllList,
   }
 }

@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { StepsProps } from "./types";
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from "@rneui/themed";
+import { State } from "../../../../../../../../../../common/State";
+import { Cell } from "./components/Cell";
 
 export function Steps({
   steps,
@@ -11,7 +11,6 @@ export function Steps({
     theme: {
       colors: {
         main1,
-        element1,
       },
     },
   } = useTheme();
@@ -20,56 +19,17 @@ export function Steps({
     <View style={{ ...styles.root, borderBottomColor: main1 }}>
       {steps.map((step) => (
         <View key={step.id} style={styles.row}>
-          <View style={styles.cell2}>
-            <MaterialCommunityIcons
-              name="currency-sign"
-              size={20}
-              color={element1}
-            />
-            <Text style={styles.stepLabel}>
-              {step.currencyStart}
-            </Text>
-          </View>
+          <Cell size={3} label={step.currencyStart} />
+          <Cell size={5} label={step.platformStart} />
+          <Cell size={1} isArrow style={{ paddingRight: 4 }} />
+          <Cell size={3} label={step.currencyEnd} />
+          <Cell size={5} label={step.platformEnd} />
 
-          <View style={styles.cell3}>
-            <MaterialIcons
-              name="currency-exchange"
-              size={20}
-              color={element1}
+          <View style={styles.cell4}>
+            <State
+              label={step.isOpen ? "Дост." : "Не дост."}
+              isState={step.isOpen}
             />
-            <Text style={styles.stepLabel}>
-              {step.platformStart}
-            </Text>
-          </View>
-
-          <View style={styles.cell}>
-            <MaterialIcons
-              name="keyboard-arrow-right"
-              size={20}
-              color="black"
-            />
-          </View>
-
-          <View style={styles.cell2}>
-            <MaterialCommunityIcons
-              name="currency-sign"
-              size={20}
-              color={element1}
-            />
-            <Text style={styles.stepLabel}>
-              {step.currencyEnd}
-            </Text>
-          </View>
-
-          <View style={styles.cell3}>
-            <MaterialIcons
-              name="currency-exchange"
-              size={20}
-              color={element1}
-            />
-            <Text style={styles.stepLabel}>
-              {step.platformEnd}
-            </Text>
           </View>
         </View>
       ))}
@@ -89,30 +49,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     width: '100%',
-    gap: 6,
   },
-  cell: {
-    flex: 1,
-    borderColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cell2: {
-    flex: 2,
-    borderColor: '#ccc',
+  cell4: {
+    flex: 5,
     alignItems: 'center',
     flexDirection: 'row',
-    columnGap: 4,
-  },
-  cell3: {
-    flex: 3,
-    borderColor: '#ccc',
-    alignItems: 'center',
-    flexDirection: 'row',
-    columnGap: 4,
-  },
-  stepLabel: {
-    fontSize: 14,
-    fontWeight: "500",
   }
 });

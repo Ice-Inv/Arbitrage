@@ -1,5 +1,5 @@
-import { createContext, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ChainsContextProps, ChainsData, ChainsFilters } from "../../types";
+import { createContext, useEffect, useMemo, useRef, useState } from "react";
+import { ChainsContextProps, ChainsData, ChainsFilters, Options } from "../../types";
 import { ChainsProviderProps } from "./types";
 import { DEFAULT_SETTINGS_FILTERS } from "./constants";
 import { useAuth } from "../../hooks/useAuth";
@@ -7,7 +7,8 @@ import { ROUTES_WEB_SOCKET } from "./routes";
 import { CHAINS_ERROR } from "../../error/Chains";
 import { getToken } from "../../utils";
 import { ACCESS_TOKEN } from "../../constants";
-import { getDataChainsFromResponse } from "./utils";
+import { getDataChainsFromResponse, getOptions } from "./utils";
+import { chainsService } from "../../services/Chains";
 
 export const ChainsContext = createContext<ChainsContextProps>({} as ChainsContextProps);
 
@@ -22,11 +23,50 @@ export function ChainsProvider({
   const [filteredChains, setFilteredChains] = useState<ChainsData[]>([]);
   const [filterSettings, setFilterSettings] = useState<ChainsFilters>(DEFAULT_SETTINGS_FILTERS);
 
+  const [currencyList, setCurrencyList] = useState<Options[]>([]);
+  const [platformList, setPlatformList] = useState<Options[]>([]);
+
   const [accessToken, setAccessToken] = useState<string | null>('');
 
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeout = useRef<number | null>(null);
   const { user } = useAuth();
+
+  /**
+   * Функция для получения списка валют
+   */
+  async function handleCurrencyList() {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const currencyList = await chainsService.getCurrencyList();
+      
+      setCurrencyList(getOptions(currencyList))
+    } catch (error) {
+      setError((error as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  /**
+   * Функция для получения списка платформ
+   */
+  async function handlePlatformList() {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const platformList = await chainsService.getPlatformList();
+      
+      setPlatformList(getOptions(platformList))
+    } catch (error) {
+      setError((error as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   /**
    * Функция для фильтрации цепочек.
@@ -177,9 +217,17 @@ export function ChainsProvider({
     if (!user) {
       if (ws.current) ws.current.close();
       if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current);
-    }
 
+      setCurrencyList([]);
+      setPlatformList([]);
+      return;
+    }
     getTokens();
+    
+    Promise.all([
+      handleCurrencyList(),
+      handlePlatformList(),
+    ]);
   }, [user]);
 
   useEffect(() => {
@@ -189,13 +237,15 @@ export function ChainsProvider({
 
   const value = useMemo(() => ({
     chains: filteredChains,
+    currencyAllList: currencyList,
+    platformAllList: platformList,
     filterSettings,
     error,
     isLoading,
     handleFilterChains,
     handleResetFilterChains,
     handleGetProfitChain,
-  }), [isLoading, filteredChains, filterSettings]);
+  }), [isLoading, filteredChains, filterSettings, currencyList, platformList]);
 
   return (
     <ChainsContext.Provider value={value}>

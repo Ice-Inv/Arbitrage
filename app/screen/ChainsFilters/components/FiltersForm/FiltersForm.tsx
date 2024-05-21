@@ -29,6 +29,8 @@ export function FiltersForm() {
     handleSetFilterChains,
     currencyList,
     platformList,
+    currencyAllList,
+    platformAllList,
   } = useFilterForm();
 
   return (
@@ -52,8 +54,16 @@ export function FiltersForm() {
         placeholder={LABEL_FORM.id}
       />
 
-      <Select { ...currencyList } options={[]} placeholder={LABEL_FORM.currencies} />
-      <Select { ...platformList } options={[]} placeholder={LABEL_FORM.platforms} />
+      <Select
+        { ...currencyList }
+        options={currencyAllList}
+        placeholder={LABEL_FORM.currencies}
+      />
+      <Select
+        { ...platformList }
+        options={platformAllList}
+        placeholder={LABEL_FORM.platforms}
+      />
 
       {/* Максимальная длина цепочки */}
       <TextField

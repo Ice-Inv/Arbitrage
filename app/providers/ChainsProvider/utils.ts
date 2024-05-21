@@ -1,4 +1,4 @@
-import { ChainsData, ChainsResponse, Course, NecessaryInformation } from "../../types";
+import { ChainsData, ChainsResponse, Course, NecessaryInformation, Options } from "../../types";
 
 /**
  * Функция, которая формирует необходимые данные для цепочек
@@ -67,4 +67,11 @@ export function getDataChainsFromResponse(chainsResponse: ChainsResponse[]): Cha
       isOpen: necessaryInformation.isOpen,
     }
   });
+}
+
+export function getOptions(options: string[]): Options[] {
+  return options.map((option) => ({
+    label: option,
+    value: option,
+  }));
 }

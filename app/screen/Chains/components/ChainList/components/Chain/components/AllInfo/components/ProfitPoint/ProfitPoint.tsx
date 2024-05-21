@@ -6,24 +6,30 @@ import { useTheme } from "@rneui/themed";
 export function ProfitPoint({
   profit,
   label,
+  isWhite,
 }: ProfitPointProps) {
   const {
     theme: {
       colors: {
         element1,
+        element2,
       },
     },
   } = useTheme();
 
   return (
     <View style={styles.profitContainer}>
-      <Text style={styles.labelProfit}>{label}</Text>
+      <Text style={{ ...styles.labelProfit, color: isWhite ? element2 : element1 }}>
+        {label}
+      </Text>
+
       <AntDesign
         name="arrowright"
         size={14}
-        color={element1}
+        color={isWhite ? element2 : element1}
       />
-      <Text style={styles.labelProfit}>
+
+      <Text style={{ ...styles.labelProfit, color: isWhite ? element2 : element1 }}>
         {profit ? `${profit}%` : 'Н/Д'}
       </Text>
     </View>
