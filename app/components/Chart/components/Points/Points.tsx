@@ -17,7 +17,7 @@ export function Points({
           <Circle
             cx={x(index)}
             cy={y(value)}
-            r={4}
+            r={6}
             fill="#AD21FB"
             onPress={() => onPress(index)}
           />

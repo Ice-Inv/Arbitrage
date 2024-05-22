@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { LineChart, Grid, YAxis } from 'react-native-svg-charts';
+import { LineChart, YAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import { format } from 'date-fns';
 import { ChartProps } from './types';
 import { Points } from './components/Points';
 import { Tooltip } from './components/Tooltip';
 import { Padding } from '../../common';
+import { GridComponent } from './components/GridComponent';
 
 export function Chart({
   data,
@@ -47,7 +48,8 @@ export function Chart({
             contentInset={{ top: 20, bottom: 10, left: 15, right: 15 }}
             curve={shape.curveMonotoneX}
           >
-            <Grid />
+            {/* <Grid /> */}
+            <GridComponent />
             <Points
               x={(x) => x}
               y={(y) => y}
