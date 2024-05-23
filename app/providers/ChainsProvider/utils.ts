@@ -65,6 +65,7 @@ export function getDataChainsFromResponse(chainsResponse: ChainsResponse[]): Cha
         bestPrice: course.best_price,
       })),
       isOpen: necessaryInformation.isOpen,
+      updateTime: chainResponse.last_update,
     }
   });
 }

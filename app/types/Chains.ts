@@ -117,6 +117,10 @@ export type ChainsData = {
    */
   residenceTime: Date;
   /**
+   * Время, когда последний раз обновился.
+   */
+  updateTime: Date;
+  /**
    * Данные о прибыльности цепочек на нескольких точек прибыльности.
    */
   profit: ProfitChains;

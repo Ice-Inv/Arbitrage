@@ -9,4 +9,5 @@ export enum NAVIGATE {
   Rates = 'Rates',
   Settings = 'Settings',
   UpdatePassword = 'UpdatePassword',
+  Correlations = 'Correlations',
 }

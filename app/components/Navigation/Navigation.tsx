@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Footer } from '../Footer';
 import { Home } from '../../screen/Home';
 import { Auth } from '../../screen/Auth';
 import { useAuth } from '../../hooks/useAuth';
-import { Chains, ChainsFilters, Income, Profile, Rates, Settings, TransactionHistory, UpdatePassword } from '../../screen';
+import { Chains, ChainsFilters, Income, Profile, Rates, Settings, TransactionHistory, UpdatePassword, Correlations } from '../../screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,6 +75,11 @@ function Navigation() {
       name: 'UpdatePassword',
       component: UpdatePassword,
     },
+    {
+      key: 10,
+      name: 'Correlations',
+      component: Correlations,
+    }
   ];
 
   return (

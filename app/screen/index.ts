@@ -8,3 +8,4 @@ export * from './ChainsFilters';
 export * from './UpdatePassword';
 export * from './Rates';
 export * from './TransactionHistory';
+export * from './Correlations';

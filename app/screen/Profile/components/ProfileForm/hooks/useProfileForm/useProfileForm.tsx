@@ -17,11 +17,16 @@ export function useProfileForm() {
     navigate(NAVIGATE.Settings);
   }
 
+  function handleSetScreenCorretations() {
+    navigate(NAVIGATE.Correlations);
+  }
+
   return {
     name,
     email,
     logout,
     handleSetScreenUpdatePassword,
     handleSetScreenSettings,
+    handleSetScreenCorretations,
   };
 }

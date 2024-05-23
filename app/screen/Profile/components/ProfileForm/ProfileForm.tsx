@@ -10,6 +10,7 @@ export function ProfileForm() {
     logout,
     handleSetScreenUpdatePassword,
     handleSetScreenSettings,
+    handleSetScreenCorretations,
   } = useProfileForm();
 
   return (
@@ -18,6 +19,7 @@ export function ProfileForm() {
       <TextField {...email } placeholder="E-mail" isDisable />
       <ButtonGradient title="Сменить пароль" onPress={handleSetScreenUpdatePassword} />
       <ButtonGradient title="Перейти к настройкам" onPress={handleSetScreenSettings} />
+      <ButtonGradient title="Корреляции" onPress={handleSetScreenCorretations} />
       <InvitationCode code={'EFR4-M5DF-LKIO-A9H0-7HCP'} />
       <Devices />
       <Button title="Выход" onPress={logout}/>

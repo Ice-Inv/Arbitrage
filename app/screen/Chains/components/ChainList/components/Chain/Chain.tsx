@@ -16,7 +16,7 @@ export function Chain({
       <RelevantInformation
         id={chainParams.id}
         length={chainParams.length}
-        residenceTime={chainParams.residenceTime}
+        residenceTime={chainParams.updateTime}
         isOpen={chainParams.isOpen}
       />
 

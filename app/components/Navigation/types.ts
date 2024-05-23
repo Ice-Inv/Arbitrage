@@ -9,4 +9,5 @@ export type TypeRootStackParamList = {
   Rates: undefined;
   Settings: undefined;
   UpdatePassword: undefined;
+  Correlations: undefined;
 }
