@@ -34,14 +34,14 @@ export function LastDeal({
             </Text>
             <View style={styles.costContainer}>
               <Text style={{ ...styles.cost, color: element1 }}>
-                {value} $
+                {value.toFixed(2)} $
               </Text>
               <View style={{ ...styles.paramContainer, backgroundColor: dynamicValueFirst > 0 ? green3 : red3}}>
                 <Text style={{ ...styles.paramContent, color: dynamicValueFirst > 0 ? green1 : red1 }}>
-                  {(dynamicValueFirst > 0 ? `+${dynamicValueFirst}` : dynamicValueFirst) ?? 'N/A'}
+                  {(dynamicValueFirst > 0 ? `+${dynamicValueFirst.toFixed(2)}` : dynamicValueFirst.toFixed(2)) ?? 'N/A'}
                 </Text>
                 <Text style={{ ...styles.paramContent, color: dynamicValueFirst > 0 ? green1 : red1 }}>
-                  {(dynamicValueSecond > 0 ? `+${dynamicValueSecond}` : dynamicValueSecond) ?? 'N/A'}%
+                  {(dynamicValueSecond > 0 ? `+${dynamicValueSecond.toFixed(2)}` : dynamicValueSecond.toFixed(2)) ?? 'N/A'}%
                 </Text>
               </View>
             </View>

@@ -34,8 +34,6 @@ export function IncomeProvider({
       setAllProfit(allProfit);
       setLastProfit(getLastOrderProfit(incomeList, allProfit));
       setChartProfitData(chartData);
-
-      console.log(allProfit, chartData);
     } catch (error) {
       setError((error as Error).message);
     } finally {

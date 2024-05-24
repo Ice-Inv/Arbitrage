@@ -80,10 +80,8 @@ export function ChainsProvider({
     platformList,
     maxLengthChains,
     profit,
-  }: ChainsFilters, newChains?: ChainsData[]) => {
-    const currentChains = newChains ? newChains : chains;
-
-    setFilteredChains(currentChains.filter((chain) => {
+  }: ChainsFilters, newChains: ChainsData[]) => {
+    setFilteredChains(newChains.filter((chain) => {
       // Проверка цепочки на id
       if (id && chain.id !== id) return false;
 
@@ -135,10 +133,13 @@ export function ChainsProvider({
     };
 
     ws.current.onmessage = (event: MessageEvent) => {
-      const chains = getDataChainsFromResponse(JSON.parse(event.data));
-
-      setChains(chains);
-      filterChains(filterSettings, chains);
+      async function getValue() {
+        const chains = await getDataChainsFromResponse(JSON.parse(event.data));
+  
+        await filterChains(filterSettings, chains);
+        await setChains(chains);
+      }
+      getValue();
     };
 
     ws.current.onerror = (error: Event) => {
@@ -184,17 +185,17 @@ export function ChainsProvider({
    * Функция устанавливающая настройки поиска
    * @param settings Настройки фильтрации цепочек
    */
-  function handleFilterChains(settings: ChainsFilters) {
-    setFilterSettings(settings);
-    filterChains(settings, chains);
+  async function handleFilterChains(settings: ChainsFilters) {
+    await setFilterSettings(settings);
+    await filterChains(settings, chains);
   }
 
   /**
    * Функция сбрасывающая все фильтры
    */
-  function handleResetFilterChains() {
-    setFilterSettings(DEFAULT_SETTINGS_FILTERS);
-    setFilteredChains(chains);
+  async function handleResetFilterChains() {
+    await setFilterSettings(DEFAULT_SETTINGS_FILTERS);
+    await setFilteredChains(chains);
   }
 
   /**
