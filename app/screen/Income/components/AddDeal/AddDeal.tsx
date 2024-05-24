@@ -5,6 +5,13 @@ import { useAddDeal } from "./hooks/useAddDeal";
 
 export function AddDeal() {
   const {
+    id,
+    openChain,
+    closeChain,
+    handleSetNewPoint,
+  } = useAddDeal();
+
+  const {
     theme: {
       colors: {
         element2,
@@ -12,11 +19,6 @@ export function AddDeal() {
     }
   } = useTheme();
 
-  const {
-    id,
-    openChain,
-    closeChain,
-  } = useAddDeal();
 
   return(
     <Padding>
@@ -25,7 +27,7 @@ export function AddDeal() {
           <TextField { ...id } placeholder="ID цепочки" style={{ backgroundColor: element2}}/>
           <TextField { ...openChain } placeholder="Вход в цепочку" style={{ backgroundColor: element2}}/>
           <TextField { ...closeChain } placeholder="Выход из цепочки" style={{ backgroundColor: element2}}/>
-          <Button title="Добавить" onPress={() => {}}/>
+          <Button title="Добавить" onPress={handleSetNewPoint}/>
         </View>
       </MainBox>
     </Padding>

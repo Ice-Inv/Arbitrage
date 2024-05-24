@@ -1,7 +1,10 @@
 import { format } from 'date-fns';
 
 enum FormatDate {
-  DayMonthYear = 'dd.MM.yyyy hh:mm'
+  DayMonthYearHorseMinutes = 'dd.MM.yyyy hh:mm:ss',
+  DayMonthYear = 'dd.MM hh:mm:ss',
 }
 
-export const formattedDate = (date: Date): string => format(new Date(), FormatDate.DayMonthYear);
+export const formattedDate = (date: Date): string => format(date, FormatDate.DayMonthYear);
+
+export const formattedFullYear = (date: Date): string => format(date, FormatDate.DayMonthYearHorseMinutes);
