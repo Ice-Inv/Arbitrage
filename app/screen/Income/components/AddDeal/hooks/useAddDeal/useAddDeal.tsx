@@ -11,6 +11,8 @@ export function useAddDeal() {
   const [closeChain, closeChainParams] = useTextField({initValue: '', regexp: RegexpPattern.emptyOrNumberDotOrCommaNumber });
 
   function handleSetNewPoint() {
+    if (!id.value || !openChain.value || !closeChain.value) return;
+
     handleSetPoint({
       loopId: getValidNumber(id.value),
       inputValue: getValidNumber(openChain.value),

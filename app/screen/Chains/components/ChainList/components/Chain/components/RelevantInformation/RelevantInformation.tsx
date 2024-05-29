@@ -5,6 +5,7 @@ import { useTheme } from "@rneui/themed";
 import { AntDesign } from '@expo/vector-icons';
 import { formattedDate } from "../../../../../../../../utils";
 import { useCopy } from "../../../../../../../../hooks";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export function RelevantInformation({
   id,
@@ -45,8 +46,13 @@ export function RelevantInformation({
 
       <View style={styles.container}>
         <View style={styles.lengthContainer}>
+          <MaterialCommunityIcons
+            name="ruler-square-compass"
+            size={20}
+            color={element1}
+          />
           <Text style={{ ...styles.label, color: element1 }}>
-            Длина {length}
+            {length}
           </Text>
         </View>
 
@@ -83,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: 4,
-    marginRight: 10,
+    marginRight: 2,
   },
   label: {
     fontSize: 16,

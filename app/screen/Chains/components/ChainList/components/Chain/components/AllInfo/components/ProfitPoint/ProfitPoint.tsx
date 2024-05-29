@@ -23,7 +23,6 @@ export function ProfitPoint({
       style={{
         ...styles.profitContainer,
         flexDirection: isRow ? 'column' : 'row',
-        paddingHorizontal: isRow? 20 : 0,
       }}
     >
       {!isRow && (
@@ -40,7 +39,7 @@ export function ProfitPoint({
       {!isRow && (
         <AntDesign
           name="arrowright"
-          size={14}
+          size={12}
           color={isWhite ? element2 : element1}
         />
       )}

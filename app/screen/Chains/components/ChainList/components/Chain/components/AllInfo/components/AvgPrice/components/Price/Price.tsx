@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 import { PriceProps } from "./types";
 import { MainGradient } from "../../../../../../../../../../../../common";
 import { ProfitPoint } from "../../../ProfitPoint";
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get('window');
+const widthPrice = (width - 32 - 24 - 16) / 3;
 
 export function Price({
   price,
@@ -27,7 +31,7 @@ export function Price({
 
 const styles = StyleSheet.create({
   root: {
-    paddingHorizontal: 6,
+    width: widthPrice,
     paddingVertical: 2,
   },
 });

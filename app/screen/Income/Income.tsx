@@ -10,8 +10,6 @@ export function Income() {
   const {
     lastProfit,
     chartProfitData,
-    isLoading,
-    error,
   } = useIncome();
 
   return (

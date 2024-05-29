@@ -1,3 +1,4 @@
+import { useTheme } from '@rneui/themed';
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet, Linking } from 'react-native';
 
@@ -10,12 +11,28 @@ export function CustomButton({
   imageUri,
   linkUri,
 }: ButtonProps) {
+  const {
+    theme: {
+      mode,
+      colors: {
+        bg1,
+        bg2,
+      },
+    },
+  } = useTheme();
+
   const handlePress = () => {
     Linking.openURL(linkUri).catch(err => console.error("Failed to open URL:", err));
   }
 
   return (
-    <TouchableOpacity style={styles.button} onPress={handlePress}>
+    <TouchableOpacity
+      style={{
+        ...styles.button,
+        backgroundColor: mode === 'light' ? bg1 : bg2,
+      }}
+      onPress={handlePress}
+    >
       <Image source={{ uri: imageUri }} style={styles.image} />
     </TouchableOpacity>
   );
@@ -23,9 +40,8 @@ export function CustomButton({
 
 const styles = StyleSheet.create({
   button: {
-    width: 100, // Зададим фиксированную ширину
-    height: 100, // и высоту для кнопок
-    backgroundColor: '#FFF',
+    width: 100,
+    height: 100,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -37,7 +53,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   image: {
-    width: 100, // Размер изображения подгоняется под размер кнопки
+    width: 100,
     height: 100,
     borderRadius: 10,
   }

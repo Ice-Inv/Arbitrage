@@ -37,7 +37,7 @@ export function Tooltip({ value, date }: TooltipProps) {
               color: value > 0 ? green1 : red1,
             }}
           >
-            {(value > 0 ? `+${value}` : value) ?? 'N/A'}$ {date ?? 'N/A'}
+            {(value > 0 ? `+${value.toFixed(2)}` : value.toFixed(2)) ?? 'N/A'}$ {date ?? 'N/A'}
           </Text>
         </View>
       )}
