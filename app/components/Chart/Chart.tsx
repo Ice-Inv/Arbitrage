@@ -8,6 +8,7 @@ import { Points } from './components/Points';
 import { Tooltip } from './components/Tooltip';
 import { Padding } from '../../common';
 import { GridComponent } from './components/GridComponent';
+import { useTheme } from '@rneui/themed';
 
 export function Chart({
   data,
@@ -15,13 +16,26 @@ export function Chart({
 }: ChartProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  const {
+    theme: {
+      mode,
+      colors: {
+        element4,
+        bg2,
+      }
+    }
+  } = useTheme();
+
   const handlePress = (index: number) => {
     setSelectedIndex(index);
   };
 
   return (
     <Padding>
-      <View style={styles.container}>
+      <View style={{
+        ...styles.container,
+        backgroundColor: mode === "light" ? element4 : bg2,
+      }}>
         <Tooltip
           value={selectedIndex !== null
             ? data[selectedIndex]
@@ -33,7 +47,12 @@ export function Chart({
           }
         />
 
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
           <YAxis
             data={data}
             contentInset={{ top: 20, bottom: 20 }}
@@ -48,7 +67,6 @@ export function Chart({
             contentInset={{ top: 20, bottom: 10, left: 15, right: 15 }}
             curve={shape.curveMonotoneX}
           >
-            {/* <Grid /> */}
             <GridComponent />
             <Points
               x={(x) => x}
@@ -69,7 +87,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 8,
     paddingVertical: 10,
-    backgroundColor: '#F3F4F6',
     borderRadius: 8,
   },
   chart: { height: 200, flex: 1, marginVertical: 10 },

@@ -2,15 +2,15 @@ import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "@rneui/themed";
 import { useDevices } from "./hooks/useDevices";
 import { Device } from "./components/Device";
+import { MainBox } from "../../../../../../common";
 
 export function Devices() {
   const {
     theme: {
       colors: {
         element1,
-        element4,
-      }
-    }
+      },
+    },
   } = useTheme();
 
   const {
@@ -20,8 +20,15 @@ export function Devices() {
   } = useDevices();
 
   return (
-    <View style={{ ...styles.container, backgroundColor: element4 }}>
-      <Text style={{ ...styles.label, color: element1 }}>Привязанные устройства</Text>
+    <MainBox>
+      <Text
+        style={{
+          ...styles.label,
+          color: element1,
+        }}
+      >
+        Привязанные устройства
+      </Text>
 
       <View style={styles.devices}>
         {deviceList.map((device, index) => (
@@ -33,7 +40,7 @@ export function Devices() {
           />
         ))}
       </View>
-    </View>
+    </MainBox>
   );
 }
 

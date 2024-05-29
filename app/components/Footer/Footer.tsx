@@ -3,13 +3,30 @@ import { MENU } from "./constants"
 import { NavItem } from "./components/NavItem"
 import { FooterProps } from "./components/NavItem/types"
 import { Padding } from "../../common"
+import { useTheme } from "@rneui/themed"
 
 export function Footer({
   navigate,
   currentRoute,
 }: FooterProps) {
+  const {
+    theme: {
+      mode,
+      colors: {
+        footer,
+        footerBorder,
+      },
+    },
+  } = useTheme();
+
   return (
-    <Padding style={styles.root}>
+    <Padding
+      style={{
+        ...styles.root,
+        backgroundColor: footer,
+        borderColor: footerBorder,
+      }}
+    >
       {MENU.map((item) => (
         <NavItem
           key={item.title}
@@ -28,11 +45,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: 'rgb(249 250 251)',
     paddingHorizontal: 0,
     paddingBottom: 20,
     paddingTop: 8,
-    borderColor: '#E1E1E1',
     borderWidth: 1,
+    // shadowColor: '#000000',
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    // elevation: 4,
   },
 })

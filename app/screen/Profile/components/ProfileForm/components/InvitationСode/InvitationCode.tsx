@@ -3,23 +3,22 @@ import { MainGradient } from "../../../../../../common/MainGradient";
 import { InvitationCodeProps } from './types';
 import { useTheme } from '@rneui/themed';
 import { Feather } from '@expo/vector-icons';
-import * as Clipboard from 'expo-clipboard';
+import { useCopy } from '../../../../../../hooks/useCopy';
 
 export function InvitationCode({
   code,
 }: InvitationCodeProps) {
   const {
     theme: {
+      mode,
       colors: {
         blue1,
+        element1,
         element2,
       }
     }
   } = useTheme();
-
-  const handleCopyInviteCode = () => {
-    Clipboard.setString(code);
-  };
+  const { handleCopy } = useCopy();
 
   return (
     <MainGradient style={styles.gradient}>
@@ -30,10 +29,14 @@ export function InvitationCode({
         </View>
 
         <TouchableOpacity
-          onPress={handleCopyInviteCode}
+          onPress={() => handleCopy(code)}
           style={{ ...styles.copy, backgroundColor: blue1 }}
         >
-          <Feather name="copy" size={24} color={element2} />
+          <Feather
+            name="copy"
+            size={24}
+            color={mode === 'light' ? element2 : element1}
+          />
         </TouchableOpacity>
       </View>
     </MainGradient>

@@ -8,14 +8,20 @@ export function MainBox({
 }: MainBoxProps) {
   const {
     theme: {
+      mode,
       colors: {
         element4,
+        bg2,
       }
     }
   } = useTheme();
 
   return (
-    <View style={{ backgroundColor: element4, ...styles.root, ...style }}>
+    <View style={{
+      backgroundColor: mode === "light" ? element4 : bg2,
+      ...styles.root,
+      ...style,
+    }}>
       {children}
     </View>
   );

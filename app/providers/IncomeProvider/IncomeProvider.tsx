@@ -16,7 +16,6 @@ export function IncomeProvider({
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [incomePoints, setIncomePoints] = useState<IncomeData[]>([]);
-  const [isLoadingInitial, setIsLoadingInitial] = useState(true);
   const [allProfit, setAllProfit] = useState(0);
   const [lastProfit, setLastProfit] = useState<LastProfitData>(LAST_PROFIT_INIT);
   const [chartProfitData, setChartProfitData] = useState<ChartProfitUser>(CHART_INIT_DATA);
@@ -67,10 +66,6 @@ export function IncomeProvider({
     handleGetAllPoint();
   }, [user]);
 
-  useEffect(() => {
-    setIsLoadingInitial(false);
-  }, []);
-
   const value: IncomeContextProps = useMemo(() => ({
     incomePoints,
     allProfit,
@@ -84,7 +79,7 @@ export function IncomeProvider({
 
   return (
     <IncomeContext.Provider value={value}>
-     {!isLoadingInitial && children}
+     {children}
     </IncomeContext.Provider>
   )
 }

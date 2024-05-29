@@ -30,7 +30,13 @@ export function LowInfo({
           />
 
           {currencyList.map((currency, index) => (
-            <Text key={index} style={styles.label}>
+            <Text
+              key={index}
+              style={{
+                ...styles.label,
+                color: element1,
+              }}
+            >
               {currency}
             </Text>
           ))}
@@ -44,7 +50,13 @@ export function LowInfo({
           />
 
           {platformList.map((platform, index) => (
-            <Text key={index} style={styles.label}>
+            <Text
+              key={index}
+              style={{
+                ...styles.label,
+                color: element1,
+              }}
+            >
               {platform}
             </Text>
           ))}

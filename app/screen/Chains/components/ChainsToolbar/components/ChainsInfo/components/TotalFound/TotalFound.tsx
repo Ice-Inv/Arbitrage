@@ -9,6 +9,7 @@ export function TotalFound({
   const {
     theme: {
       colors: {
+        element1,
         green1,
       }
     }
@@ -17,7 +18,14 @@ export function TotalFound({
   return (
     <View style={styles.root}>
       <FontAwesome6 name="chart-line" size={20} color={green1} />
-      <Text style={styles.total}>{total}</Text>
+      <Text
+        style={{
+          ...styles.total,
+          color: element1,
+        }}
+      >
+        {total}
+      </Text>
     </View>
   );
 }

@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 import { InfoScreen, MainBox } from "../../../../../../common";
 import { TotalFound } from "./components/TotalFound";
 import { Sorting } from "./components/Sorting";
+import { useChains } from "../../../../../../hooks/useChains";
 
 export function ChainsInfo() {
+  const { chains } = useChains();
+
   return (
     <MainBox style={styles.root}>
-      <TotalFound total={28} />
+      <TotalFound total={chains.length} />
       <InfoScreen />
       <Sorting />
     </MainBox>

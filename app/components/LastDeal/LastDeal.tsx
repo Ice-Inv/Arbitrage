@@ -12,6 +12,7 @@ export function LastDeal({
 }: LastDealProps) {
   const {
     theme: {
+      mode,
       colors: {
         element1,
         element2,
@@ -50,7 +51,7 @@ export function LastDeal({
             <SimpleLineIcons
               name="briefcase"
               size={24}
-              color={element2}
+              color={mode === 'light' ? element2 : element1}
             />
           </View>
         </View>

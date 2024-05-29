@@ -10,13 +10,21 @@ export function Tooltip({ value, date }: TooltipProps) {
         green3,
         red1,
         red3,
+        element1,
       },
     }
   } = useTheme();
 
   return (
     <View style={styles.infoContainer}>
-      <Text style={styles.title}>История доходности</Text>
+      <Text
+        style={{
+          ...styles.title,
+          color: element1,
+        }}
+      >
+        История доходности
+      </Text>
 
       {value !== null && date !== null && (
         <View style={{
@@ -38,7 +46,10 @@ export function Tooltip({ value, date }: TooltipProps) {
 }
 
 const styles = StyleSheet.create({
-  title: { fontSize: 15, fontWeight: 'bold' },
+  title: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
   tooltip: {
     padding: 8,
     borderRadius: 5,

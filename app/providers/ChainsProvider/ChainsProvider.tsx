@@ -17,7 +17,6 @@ export function ChainsProvider({
 }: ChainsProviderProps) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingInitial, setIsLoadingInitial] = useState(true);
 
   const [chains, setChains] = useState<ChainsData[]>([]);
   const [filteredChains, setFilteredChains] = useState<ChainsData[]>([]);
@@ -31,6 +30,17 @@ export function ChainsProvider({
   const ws = useRef<WebSocket | null>(null);
   const reconnectTimeout = useRef<number | null>(null);
   const { user } = useAuth();
+
+  const filterSettingsRef = useRef<ChainsFilters>(filterSettings);
+  const chainsRef = useRef<ChainsData[]>(chains);
+
+  useEffect(() => {
+    filterSettingsRef.current = filterSettings;
+  }, [filterSettings]);
+
+  useEffect(() => {
+    chainsRef.current = chains;
+  }, [chains]);
 
   /**
    * Функция для получения списка валют
@@ -136,8 +146,8 @@ export function ChainsProvider({
       async function getValue() {
         const chains = await getDataChainsFromResponse(JSON.parse(event.data));
   
-        await filterChains(filterSettings, chains);
-        await setChains(chains);
+        filterChains(filterSettingsRef.current, chains);
+        setChains(chains);
       }
       getValue();
     };
@@ -185,17 +195,17 @@ export function ChainsProvider({
    * Функция устанавливающая настройки поиска
    * @param settings Настройки фильтрации цепочек
    */
-  async function handleFilterChains(settings: ChainsFilters) {
-    await setFilterSettings(settings);
-    await filterChains(settings, chains);
+  function handleFilterChains(settings: ChainsFilters) {
+    setFilterSettings(settings);
+    filterChains(settings, chainsRef.current);
   }
 
   /**
    * Функция сбрасывающая все фильтры
    */
-  async function handleResetFilterChains() {
-    await setFilterSettings(DEFAULT_SETTINGS_FILTERS);
-    await setFilteredChains(chains);
+  function handleResetFilterChains() {
+    setFilterSettings(DEFAULT_SETTINGS_FILTERS);
+    setFilteredChains(chainsRef.current);
   }
 
   /**
@@ -233,7 +243,6 @@ export function ChainsProvider({
 
   useEffect(() => {
     getTokens();
-    setIsLoadingInitial(false);
   }, []);
 
   const value = useMemo(() => ({
@@ -250,7 +259,7 @@ export function ChainsProvider({
 
   return (
     <ChainsContext.Provider value={value}>
-     {!isLoadingInitial && children}
+     {children}
     </ChainsContext.Provider>
   )
 }

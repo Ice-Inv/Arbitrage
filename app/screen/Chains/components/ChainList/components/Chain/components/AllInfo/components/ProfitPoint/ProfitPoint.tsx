@@ -7,6 +7,7 @@ export function ProfitPoint({
   profit,
   label,
   isWhite,
+  isRow = false,
 }: ProfitPointProps) {
   const {
     theme: {
@@ -18,18 +19,38 @@ export function ProfitPoint({
   } = useTheme();
 
   return (
-    <View style={styles.profitContainer}>
-      <Text style={{ ...styles.labelProfit, color: isWhite ? element2 : element1 }}>
-        {label}
-      </Text>
+    <View
+      style={{
+        ...styles.profitContainer,
+        flexDirection: isRow ? 'column' : 'row',
+        paddingHorizontal: isRow? 20 : 0,
+      }}
+    >
+      {!isRow && (
+        <Text
+          style={{
+            ...styles.labelProfit,
+            color: isWhite ? element2 : element1,
+          }}
+        >
+          {label}
+        </Text>
+      )}
+      
+      {!isRow && (
+        <AntDesign
+          name="arrowright"
+          size={14}
+          color={isWhite ? element2 : element1}
+        />
+      )}
 
-      <AntDesign
-        name="arrowright"
-        size={14}
-        color={isWhite ? element2 : element1}
-      />
-
-      <Text style={{ ...styles.labelProfit, color: isWhite ? element2 : element1 }}>
+      <Text
+        style={{
+          ...styles.labelProfit,
+          color: isWhite ? element2 : element1,
+        }}
+      >
         {profit ? `${profit}%` : 'Н/Д'}
       </Text>
     </View>
@@ -38,7 +59,6 @@ export function ProfitPoint({
 
 const styles = StyleSheet.create({
   profitContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
   },
   labelProfit: {

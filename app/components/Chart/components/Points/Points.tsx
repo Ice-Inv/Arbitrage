@@ -1,6 +1,7 @@
 import { PointsProps } from "./types";
 import { Circle, G, Text as SVGText } from 'react-native-svg';
 import { format } from 'date-fns';
+import { useTheme } from "@rneui/themed";
 
 export function Points({
   x,
@@ -10,6 +11,14 @@ export function Points({
   onPress,
   selectedIndex,
 }: PointsProps) {
+  const {
+    theme: {
+      colors: {
+        element1,
+      }
+    }
+  } = useTheme();
+
   return (
     <G>
       {data.map((value, index) => (
@@ -25,7 +34,7 @@ export function Points({
             <SVGText
               x={x(index)}
               y={y(value) - 10}
-              fill="#000"
+              fill={element1}
               fontSize="10"
               textAnchor="middle"
             >

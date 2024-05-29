@@ -9,6 +9,7 @@ export function Header() {
     theme: {
       colors: {
         blue1,
+        element1,
       },
     },
   } = useTheme();
@@ -21,7 +22,12 @@ export function Header() {
   return (
     <Padding style={styles.root}>
       <View style={styles.info}>
-        <Text style={styles.title}>
+        <Text
+          style={{
+            ...styles.title,
+            color: element1,
+          }}
+        >
           Фильтры по цепочкам
         </Text>
         <InfoScreen/>

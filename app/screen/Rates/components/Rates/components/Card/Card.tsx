@@ -25,8 +25,17 @@ export function Card({
     <MainBox>
       <View style={styles.spaceBetween}>
         <Text style={{ ...styles.textRates, color: element1 }}>{title}</Text>
-        <View style={styles.check}>
-          <AntDesign name="check" size={18} color="black" />
+        <View
+          style={{
+            ...styles.check,
+            borderColor: element1,
+          }}
+        >
+          <AntDesign
+            name="check"
+            size={18}
+            color={element1}
+          />
         </View>
       </View>
       {description.map((item, key) => (
@@ -73,7 +82,6 @@ const styles = StyleSheet.create({
   },
   check: {
     borderWidth: 1,
-    borderColor: 'black',
     borderRadius: 4,
     width: 24,
     height: 24,

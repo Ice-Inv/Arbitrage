@@ -15,6 +15,7 @@ export function AddDeal() {
     theme: {
       colors: {
         element2,
+        element1,
       }
     }
   } = useTheme();
@@ -24,9 +25,21 @@ export function AddDeal() {
     <Padding>
       <MainBox style={{ paddingVertical: 0, marginTop: 0, marginBottom: 30 }}>
         <View>
-          <TextField { ...id } placeholder="ID цепочки" style={{ backgroundColor: element2}}/>
-          <TextField { ...openChain } placeholder="Вход в цепочку" style={{ backgroundColor: element2}}/>
-          <TextField { ...closeChain } placeholder="Выход из цепочки" style={{ backgroundColor: element2}}/>
+          <TextField
+            { ...id }
+            placeholder="ID цепочки"
+            style={{ backgroundColor: element2, color: element1 }}
+          />
+          <TextField
+            { ...openChain }
+            placeholder="Вход в цепочку"
+            style={{ backgroundColor: element2, color: element1 }}
+          />
+          <TextField
+            { ...closeChain }
+            placeholder="Выход из цепочки"
+            style={{ backgroundColor: element2, color: element1 }}
+          />
           <Button title="Добавить" onPress={handleSetNewPoint}/>
         </View>
       </MainBox>

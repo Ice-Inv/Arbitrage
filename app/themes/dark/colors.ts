@@ -9,7 +9,7 @@ export const colorsDark: ThemeColor = {
   [ThemeColorKey.Element3]: '#666666',
   [ThemeColorKey.Element4]: '#f3f4f6',
   [ThemeColorKey.Main1]: '#FFD600',
-  [ThemeColorKey.Main2]: '#7425C3',
+  [ThemeColorKey.Main2]: '#F92EDB',
   [ThemeColorKey.Main3]: '#FBFF00',
   [ThemeColorKey.Green1]: '#0BE881',
   [ThemeColorKey.Green2]: '#364334',
@@ -18,4 +18,6 @@ export const colorsDark: ThemeColor = {
   [ThemeColorKey.Red2]: '#4B2E2D',
   [ThemeColorKey.Red3]: 'rgba(255, 46, 0, 0.15)',
   [ThemeColorKey.Blue1]: '#00A3FF',
+  [ThemeColorKey.Footer]: 'rgba(51, 51, 51, 0.6)',
+  [ThemeColorKey.FooterBorder]: '#333333',
 };

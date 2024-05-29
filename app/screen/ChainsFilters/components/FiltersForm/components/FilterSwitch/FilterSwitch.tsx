@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { FilterSwitchProps } from "./types";
 import { Switch } from "../../../../../../common";
+import { useTheme } from "@rneui/themed";
 
 /**
  * Предоставляет компонент переключателя с подписью.
@@ -20,9 +21,24 @@ export function FilterSwitch({
   isDisabled,
   style = {},
 }: FilterSwitchProps) {
+  const {
+    theme: {
+      colors: {
+        element1,
+      }
+    }
+  } = useTheme();
+
   return (
     <View style={{ ...styles.root, ...style }}>
-      <Text style={styles.filterLabel}>{label}</Text>
+      <Text
+        style={{
+          ...styles.filterLabel,
+          color: element1,
+        }}
+      >
+        {label}
+      </Text>
       <Switch
         isEnabled={isEnabled}
         handleIsEnabled={handleIsEnabled}

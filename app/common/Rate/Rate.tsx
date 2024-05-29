@@ -8,9 +8,7 @@ export function Rate() {
   const { navigate } = useNavigation();
   const {
     theme: {
-      mode,
       colors: {
-        element1,
         element2,
       }
     }
@@ -26,7 +24,7 @@ export function Rate() {
         <Text
           style={{
             ...styles.text,
-            color: mode === 'light' ? element2 : element1,
+            color: element2,
           }}
         >
           Premium

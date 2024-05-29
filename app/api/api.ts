@@ -25,13 +25,18 @@ const refreshService = axios.create({
 // Запрос для обновления токена
 async function refreshAccessToken() {
   const currentRefreshToken = await getToken(REFRESH_TOKEN);
+  const tokenTypeBearer = await getToken(TOKEN_TYPE) || DEFAULT_TOKEN_TYPE;
 
-  if (!currentRefreshToken) {
+  if (!currentRefreshToken || currentRefreshToken === 'undefined') {
     throw new Error(AUTH_ERROR.NotRefreshToken);
   }
 
   try {
-    const response = await refreshService.put<Tokens>(AUTH_ROUTES.Refresh, { currentRefreshToken });
+    const response = await refreshService.put<Tokens>(AUTH_ROUTES.Refresh, {}, {
+      headers: {
+        Authorization: `${tokenTypeBearer} ${currentRefreshToken}`,
+      }
+    });
     const { accessToken, refreshToken, tokenType } = toCamelCase(response.data);
 
     // Сохраняем новые токены

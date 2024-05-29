@@ -18,6 +18,8 @@ export enum ThemeColorKey {
   Red2 = 'red2',
   Red3 = 'red3',
   Blue1 = 'blue1',
+  Footer = 'footer',
+  FooterBorder = 'footerBorder',
 };
 
 export type ThemeColor = Record<ThemeColorKey, string>;

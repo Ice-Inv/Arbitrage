@@ -23,7 +23,18 @@ export function TextField({
   isDisable = false,
   style,
 }: FieldProps) {
-  const {theme} = useTheme();
+  const {
+    theme: {
+      mode,
+      colors: {
+        bg3,
+        element1,
+        element2,
+        element3,
+        element4,
+      }
+    }
+  } = useTheme();
 
   return (
     <TextInput
@@ -34,14 +45,14 @@ export function TextField({
       autoCapitalize="none"
       style={{
         borderRadius: 8,
-        backgroundColor: theme.mode === 'dark' ? theme.colors.bg3 : theme.colors.element4,
-        color:  theme.mode === 'dark' ? theme.colors.element2 : theme.colors.element1,
+        backgroundColor: mode === 'dark' ? bg3 : element4,
+        color:  mode === 'dark' ? element2 : element1,
         marginTop: 15,
         padding: 12,
         width: '100%',
         ...style,
       }}
-      placeholderTextColor={theme.colors.element3}
+      placeholderTextColor={element3}
       editable={!isDisable}
     />
   )

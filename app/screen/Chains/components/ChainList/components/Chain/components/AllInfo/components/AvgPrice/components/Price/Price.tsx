@@ -5,18 +5,28 @@ import { ProfitPoint } from "../../../ProfitPoint";
 
 export function Price({
   price,
-  label
+  label,
+  isRow = false,
 }: PriceProps) {
   return (
-    <MainGradient style={styles.root}>
-      <ProfitPoint label={label} profit={price} isWhite />
+    <MainGradient
+      style={{
+        ...styles.root,
+        borderRadius: isRow ? 4 : 18,
+      }}
+    >
+      <ProfitPoint
+        label={label}
+        profit={price}
+        isRow={isRow}
+        isWhite
+      />
     </MainGradient>
   );
 }
 
 const styles = StyleSheet.create({
   root: {
-    borderRadius: 18,
     paddingHorizontal: 6,
     paddingVertical: 2,
   },

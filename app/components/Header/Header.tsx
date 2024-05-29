@@ -21,7 +21,6 @@ export function Header({
       mode,
       colors : {
         element1,
-        element2,
       },
     },
   } = useTheme();
@@ -51,7 +50,7 @@ export function Header({
             <Text
               style={{
                 ...styles.avatarText,
-                color: mode === 'light' ? element1 : element2
+                color: element1,
               }}
             >
               {title ? title : user?.name || 'Noname'}
@@ -60,7 +59,9 @@ export function Header({
               <Entypo
                 name="chevron-small-right"
                 size={28}
-                style={styles.avatarIcon}
+                style={{
+                  color: element1,
+                }}
               />
             )}
           </TouchableOpacity>
@@ -90,8 +91,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     fontWeight: 'bold',
-  },
-  avatarIcon: {
-    color: 'rgb(31 41 55)',
   },
 })

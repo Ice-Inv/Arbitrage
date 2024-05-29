@@ -11,8 +11,10 @@ export function InvitationCode({
 }: InvitationCodeProps) {
   const {
     theme: {
+      mode,
       colors: {
         blue1,
+        element1,
         element2,
       }
     }
@@ -34,9 +36,16 @@ export function InvitationCode({
 
             <TouchableOpacity
               onPress={handleCopyInviteCode}
-              style={{ ...styles.copy, backgroundColor: blue1 }}
+              style={{
+                ...styles.copy,
+                backgroundColor: blue1,
+              }}
             >
-              <Feather name="users" size={24} color={element2} />
+              <Feather
+                name="users"
+                size={24}
+                color={mode === 'light' ? element2 : element1}
+              />
             </TouchableOpacity>
           </View>
         </MainGradient>

@@ -18,4 +18,6 @@ export const colorsLight: ThemeColor = {
   [ThemeColorKey.Red2]: '#4B2E2D',
   [ThemeColorKey.Red3]: 'rgba(255, 46, 0, 0.15)',
   [ThemeColorKey.Blue1]: '#00A3FF',
+  [ThemeColorKey.Footer]: 'rgba(249, 250, 251, 1)',
+  [ThemeColorKey.FooterBorder]: '#E1E1E1',
 };

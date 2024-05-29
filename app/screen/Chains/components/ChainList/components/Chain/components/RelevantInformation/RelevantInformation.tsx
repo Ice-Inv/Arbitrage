@@ -4,6 +4,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { useTheme } from "@rneui/themed";
 import { AntDesign } from '@expo/vector-icons';
 import { formattedDate } from "../../../../../../../../utils";
+import { useCopy } from "../../../../../../../../hooks";
 
 export function RelevantInformation({
   id,
@@ -19,13 +20,21 @@ export function RelevantInformation({
       }
     }
   } = useTheme();
+  const { handleCopy } = useCopy();
 
   return (
     <View style={{ ...styles.root, borderBlockColor: main1 }}>
       <View style={styles.idContainer}>
-        <Text style={styles.idLabel}>ID: {id}</Text>
+        <Text
+          style={{
+            ...styles.idLabel,
+            color: element1,
+          }}
+        >
+          ID: {id}
+        </Text>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => handleCopy(id)}>
           <FontAwesome6
             name="copy"
             size={16}

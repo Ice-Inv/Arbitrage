@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text } from "react-native";
 import { Layout, MainBox, Padding } from "../../common";
 import { Header } from "../../components";
+import { useTheme } from "@rneui/themed";
 
 export function Correlations() {
   const DATA = [
@@ -14,6 +15,14 @@ export function Correlations() {
     {id: '14', platform1: 'TON-ETH', profit1: '+5.12%', time: '±3.61 мин', platform2: 'NIBI=ICP', profit2: '+8.72%', value: '0.92'},
   ]
 
+  const {
+    theme: {
+      colors: {
+        element1,
+      }
+    }
+  } = useTheme();
+
   return (
     <Layout>
       <Header title="Корреляции" isNotCircle />
@@ -21,11 +30,46 @@ export function Correlations() {
       <Padding>
         {DATA.map((item) => (
           <MainBox key={item.id} style={styles.root}>
-            <Text style={styles.text}>{item.platform1}</Text>
-            <Text style={styles.text}>{item.profit1}</Text>
-            <Text style={styles.text}>{item.time}</Text>
-            <Text style={styles.text}>{item.platform2}</Text>
-            <Text style={styles.text}>{item.value}</Text>
+            <Text
+              style={{
+                ...styles.text,
+                color: element1,
+              }}
+            >
+              {item.platform1}
+            </Text>
+            <Text
+              style={{
+                ...styles.text,
+                color: element1,
+              }}
+            >
+              {item.profit1}
+            </Text>
+            <Text
+              style={{
+                ...styles.text,
+                color: element1,
+              }}
+            >
+              {item.time}
+            </Text>
+            <Text
+              style={{
+                ...styles.text,
+                color: element1,
+              }}
+            >
+              {item.platform2}
+            </Text>
+            <Text
+              style={{
+                ...styles.text,
+                color: element1,
+              }}
+            >
+              {item.value}
+            </Text>
           </MainBox>
         ))}
       </Padding>

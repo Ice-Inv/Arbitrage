@@ -8,6 +8,7 @@ export function MainGradient({
 }: MainGradientProps) {
   const {
     theme: {
+      mode,
       colors: {
         main1,
         main2,
@@ -16,9 +17,14 @@ export function MainGradient({
     }
   } = useTheme();
 
+  const VARIANT = {
+    light: [main1, main3, main2],
+    dark: [main3, main2],
+  }
+
   return (
     <LinearGradient
-      colors={[main1, main3, main2]}
+      colors={VARIANT[mode]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={style}

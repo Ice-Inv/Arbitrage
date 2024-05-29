@@ -5,10 +5,20 @@ import { ContainerProps } from "./types";
 export function Container({
   children,
 }: ContainerProps) {
-  const { theme } = useTheme();
+  const {
+    theme: {
+      colors: {
+        bg1,
+      },
+    }
+  } = useTheme();
 
   return (
-    <View style={{height: '100%', width: '100%', backgroundColor: theme.colors.bg1}}>
+    <View style={{
+      height: '100%',
+      width: '100%',
+      backgroundColor: bg1
+    }}>
       {children}
     </View>
   )

@@ -23,7 +23,7 @@ export function Cell({
         <MaterialIcons
           name="keyboard-arrow-right"
           size={20}
-          color="black"
+          color={element1}
         />
       ) : (
         <Text style={{ ...styles.stepLabel, color: element1 }}>
