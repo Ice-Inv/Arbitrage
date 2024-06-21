@@ -27,7 +27,7 @@ export function Points({
             cx={x(index)}
             cy={y(value)}
             r={6}
-            fill="#AD21FB"
+            fill="#0652DD"
             onPress={() => onPress(index)}
           />
           {selectedIndex === index && (

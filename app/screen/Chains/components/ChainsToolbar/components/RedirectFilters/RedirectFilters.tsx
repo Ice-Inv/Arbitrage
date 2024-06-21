@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 34,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 18,
+    borderRadius: 8,
   },
   buttonIcon: {
     transform: [{ rotate: '90deg' }]

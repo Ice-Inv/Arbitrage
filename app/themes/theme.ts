@@ -5,5 +5,5 @@ import { colorsLight } from "./light";
 export const MainTheme = createTheme({
   lightColors: colorsLight,
   darkColors: colorsDark,
-  mode: 'dark', // or 'light'
+  mode: 'light', // or 'dark'
 });

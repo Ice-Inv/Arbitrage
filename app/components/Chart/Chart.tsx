@@ -63,7 +63,7 @@ export function Chart({
           <LineChart
             style={styles.chart}
             data={data}
-            svg={{ stroke: '#AD21FB' }}
+            svg={{ stroke: '#0652DD' }}
             contentInset={{ top: 20, bottom: 10, left: 15, right: 15 }}
             curve={shape.curveMonotoneX}
           >

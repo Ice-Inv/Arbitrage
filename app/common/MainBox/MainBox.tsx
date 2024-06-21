@@ -29,7 +29,7 @@ export function MainBox({
 
 const styles = StyleSheet.create({
   root: {
-    borderRadius: 8,
+    borderRadius: 4,
     paddingVertical: 12,
     paddingHorizontal: 12,
     marginTop: 15,

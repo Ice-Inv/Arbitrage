@@ -7,7 +7,6 @@ export function Profile() {
   return (
     <Layout>
       <Header title="Личный кабинет" isNotCircle />
-      <Avatar />
       <ProfileForm />
     </Layout>
   );
